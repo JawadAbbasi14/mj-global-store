@@ -268,10 +268,25 @@ This project is licensed under the **MIT License** - see [LICENSE](LICENSE) for 
 > For enterprise licensing or commercial support, contact [jawadabbasi@example.com](mailto:jawadabbasi@example.com)
 
 ## 🌐 Connect
-
-[![GitHub](https://img.shields.io/badge/GitHub-Profile-181717?logo=github)](https://github.com/JawadAbbasi14)
-[![Twitter](https://img.shields.io/badge/Twitter-Follow-1DA1F2?logo=twitter)]([https://twitter.com/JawadDev](https://x.com/MJxJawaD))
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0077B5?logo=linkedin)](https://linkedin.com/in/jawad-abbasi)
+<div align="center">
+  <h3>📫 Let's Connect!</h3>
+  
+  <a href="https://github.com/JawadAbbasi14" target="_blank">
+    <img src="https://img.shields.io/badge/GitHub-Profile-181717?style=for-the-badge&logo=github&logoColor=white" />
+  </a>
+  
+  <a href="https://www.linkedin.com/in/mjabbasi-dev" target="_blank">
+    <img src="https://img.shields.io/badge/LinkedIn-Connect-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" />
+  </a>
+  
+  <a href="https://twitter.com/mjabbasi_dev" target="_blank">
+    <img src="https://img.shields.io/badge/Twitter-Follow-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white" />
+  </a>
+  
+  <a href="mailto:jawadabbasi1107@gmail.com" target="_blank">
+    <img src="https://img.shields.io/badge/Gmail-Contact-D14836?style=for-the-badge&logo=gmail&logoColor=white" />
+  </a>
+</div>
 
 ---
 
