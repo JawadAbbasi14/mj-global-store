@@ -270,7 +270,7 @@ This project is licensed under the **MIT License** - see [LICENSE](LICENSE) for 
 ## 🌐 Connect
 
 [![GitHub](https://img.shields.io/badge/GitHub-Profile-181717?logo=github)](https://github.com/JawadAbbasi14)
-[![Twitter](https://img.shields.io/badge/Twitter-Follow-1DA1F2?logo=twitter)](https://twitter.com/JawadDev)
+[![Twitter](https://img.shields.io/badge/Twitter-Follow-1DA1F2?logo=twitter)]([https://twitter.com/JawadDev](https://x.com/MJxJawaD))
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0077B5?logo=linkedin)](https://linkedin.com/in/jawad-abbasi)
 
 ---
