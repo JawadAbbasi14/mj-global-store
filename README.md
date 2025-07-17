@@ -279,14 +279,15 @@ This project is licensed under the **MIT License** - see [LICENSE](LICENSE) for 
     <img src="https://img.shields.io/badge/LinkedIn-Connect-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" />
   </a>
   
-  <a href="https://twitter.com/mjabbasi_dev" target="_blank">
-    <img src="https://img.shields.io/badge/Twitter-Follow-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white" />
+  <a href="https://x.com/MJxJawaD" target="_blank">
+    <img src="https://img.shields.io/badge/X-Follow-000000?style=for-the-badge&logo=twitter&logoColor=white" />
   </a>
   
   <a href="mailto:jawadabbasi1107@gmail.com" target="_blank">
     <img src="https://img.shields.io/badge/Gmail-Contact-D14836?style=for-the-badge&logo=gmail&logoColor=white" />
   </a>
 </div>
+
 
 ---
 
