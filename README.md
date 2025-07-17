@@ -280,14 +280,13 @@ This project is licensed under the **MIT License** - see [LICENSE](LICENSE) for 
   </a>
   
   <a href="https://x.com/MJxJawaD" target="_blank">
-    <img src="https://img.shields.io/badge/X-Follow-000000?style=for-the-badge&logo=twitter&logoColor=white" />
+    <img src="https://img.shields.io/badge/X-Follow-000000?style=for-the-badge&logo=x&logoColor=white" />
   </a>
   
   <a href="mailto:jawadabbasi1107@gmail.com" target="_blank">
     <img src="https://img.shields.io/badge/Gmail-Contact-D14836?style=for-the-badge&logo=gmail&logoColor=white" />
   </a>
 </div>
-
 
 ---
 
