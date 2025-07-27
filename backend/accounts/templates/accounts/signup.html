@@ -10,13 +10,16 @@
         {% csrf_token %}
 
         <label>User Name:</label><br>
-        <input type="text" name="username" required><br>
-
+        <input type="text" name="username" placeholder="Enter your Full Name" required><br>
+        
         <label>Password:</label><br>
-        <input type="password" name="password" required><br>
+        <input type="password" name="password" placeholder="Type Password" required><br>
 
         <label>Your Email:</label><br>
-        <input type="email" name="email" required><br><br>
+        <input type="email" name="email" placeholder="Enter Email" required><br><br>
+
+        <label>Please give your feedback</label>
+        <input type="text" name="feedback" placeholder="Give your  valueable feedback hare!">
 
         <button type="submit">Submit</button>
     </form>

@@ -16,6 +16,7 @@ def signup(request):
         username = request.POST['username']
         password = request.POST['password']
         email = request.POST['email']
+        feedback = request.POST['feedback']
 
         print("User input:", username, password, email)
         return HttpResponse("Signup successfully jawad!")
