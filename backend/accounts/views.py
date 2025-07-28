@@ -11,7 +11,7 @@ def signup(request):
 
         if password == confirm_password:
             if User.objects.filter(username=username).exists():
-                messages.error(request, "Username already taken!")   
+                messages.error(request, "Username already taken!")
                 return redirect('signup')
             elif User.objects.filter(email=email).exists():
                 messages.error(request, "Email already registered!")
