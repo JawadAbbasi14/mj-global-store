@@ -4,18 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MJ_GLOBAL-STORE</title>
-</head>
-<body>
+    <!-- link css file -->
+   {% load static %}
+<link rel="stylesheet" href="{% static 'accounts/style.css' %}">
+
+    <!-- form html  -->
     <form method="post">
         {% csrf_token %}
 
-        <label>User Name:</label><br>
+        <label>Name:</label><br>
         <input type="text" name="username" placeholder="Enter your Full Name" required><br>
-        
+
         <label>Password:</label><br>
         <input type="password" name="password" placeholder="Type Password" required><br>
 
-        <label>Your Email:</label><br>
+        <label>Email:</label><br>
         <input type="email" name="email" placeholder="Enter Email" required><br><br>
 
         <label>Please give your feedback</label>
