@@ -5,29 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MJ_GLOBAL-STORE</title>
     <!-- link css file -->
-   {% load static %}
-<link rel="stylesheet" href="{% static 'accounts/style.css' %}">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'accounts/style.css' %}">
+</head>
+<body>
 
-    <!-- form html  -->
+    <!-- Messages Display -->
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+{% endif %}
+
+    <!-- Signup Form -->
     <form method="post">
         {% csrf_token %}
 
-        <label>Name:</label><br>
-        <input type="text" name="username" placeholder="Enter your Full Name" required><br>
-
-        <label>Password:</label><br>
-        <input type="password" name="password" placeholder="Type Password" required><br>
-
-        <label>Confirm Password</label><br>
-        <input type="password" placeholder="Confirm your password" name="confirm_password" required>
+        <label>Username:</label><br>
+        <input type="text" name="username" value="{{ username|default:'' }}" placeholder="Enter your Username" required><br><br>
 
         <label>Email:</label><br>
-        <input type="email" name="email" placeholder="Enter Email" required><br><br>
+        <input type="email" name="email" value="{{ email|default:'' }}" placeholder="Enter Email" required><br><br>
 
-        <label>Please give your feedback</label>
-        <input type="text" name="feedback" placeholder="Give your  valueable feedback hare!">
+        <label>Password:</label><br>
+        <input type="password" name="password" placeholder="Type Password" required><br><br>
+
+        <label>Confirm Password:</label><br>
+        <input type="password" name="confirm_password" placeholder="Confirm your password" required><br><br>
+
+        <label>Feedback:</label><br>
+        <input type="text" name="feedback" value="{{ feedback|default:'' }}" placeholder="Give your valuable feedback here!"><br><br>
 
         <button type="submit">Submit</button>
     </form>
+
 </body>
 </html>

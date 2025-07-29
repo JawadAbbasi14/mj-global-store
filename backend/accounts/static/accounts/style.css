@@ -45,3 +45,42 @@ h2 {
     margin-bottom: 20px;
     color: #5b67f3;
 }
+
+/* accounts/style.css */
+
+.alert {
+    padding: 10px 16px;
+    margin-bottom: 16px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    color: #fff;
+    opacity: 0.9;
+    transition: opacity 0.3s ease;
+}
+/* Messages  styling */
+
+.alert-success {
+    background-color: #28a745;
+    border-color: #28a745;
+    color: #fff;
+}
+
+.alert-error,
+.alert-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    color: #fff;
+}
+
+.alert-warning {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+.alert-info {
+    background-color: #17a2b8;
+    color: #fff;
+}
+
