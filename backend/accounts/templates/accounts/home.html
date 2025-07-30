@@ -1,12 +1,23 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MJ_GLOBAL-STORE</title>
+    <link rel="stylesheet" href="{% static 'accounts/style.css' %}">
 </head>
 <body>
     <h1>Welcome to MJ_GLOBAL-STORE</h1>
+
+    {% if user.is_authenticated %}
+        <p>Hello, {{ user.username }}!</p>
+        <a href="{% url 'logout_view' %}">Logout</a>
+    {% else %}
+        <a href="{% url 'login_view' %}">Login</a> |
+        <a href="{% url 'signup_view' %}">Signup</a>
+    {% endif %}
+
     {% if messages %}
         <ul class="messages">
             {% for message in messages %}
