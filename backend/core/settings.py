@@ -10,6 +10,44 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
+import os
+import logging
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{asctime} - {levelname} - {name} - {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'global_file': {
+            'level': 'ERROR',
+            'class': 'logging.FileHandler',
+            'filename': '/run/media/mj/DevDrive/lost+found/mj-global-store-error.log',
+            'formatter': 'verbose',
+        },
+    },
+    'loggers': {
+        # Django internal errors
+        'django': {
+            'handlers': ['global_file'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+        # Custom project errors
+        'project': {
+            'handlers': ['global_file'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+    },
+}
+
+
+
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -60,7 +98,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [],
         'APP_DIRS': True,
-        'OPTIONS': {        
+        'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',

@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login,logout
 import re
+import logging
+from django.http import HttpResponse
 
 def home(request):
     return render(request, 'accounts/home.html')
@@ -76,3 +78,16 @@ def logout_view(request):
     logout(request)
     return redirect("login_view")
 
+#This part is error file
+
+
+logger = logging.getLogger('project')
+
+def test_error(request):
+    try:
+       1 > 3 # Force error
+    except Exception as e:
+        logger.error("Custom error in test_error view: %s", e)
+    return HttpResponse("Error test done! Check log file.")
+
+# ///////////////////////////
