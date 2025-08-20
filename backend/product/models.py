@@ -5,11 +5,13 @@ class Products(models.Model):
     stock = models.IntegerField(default=0)
     description = models.TextField(max_length=1000)
 
-    def __str__(self):
-        return self.name
+
 
     class Meta:
         db_table = "product_table"
         verbose_name = "Product"
         verbose_name_plural = "Products"
         ordering = ['name']
+
+    def __str__(self):
+        return self.name
