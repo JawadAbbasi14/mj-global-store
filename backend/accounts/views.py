@@ -6,8 +6,8 @@ import re
 import logging
 from django.http import HttpResponse
 
-def home(request):
-    return render(request, 'accounts/home.html')
+def dashboard(request):
+    return render(request, 'accounts/dashboard.html')
 
 def signup(request):
     if request.method == 'POST':
@@ -44,7 +44,7 @@ def signup(request):
         try:
             user = User.objects.create_user(username=username, email=email, password=password)
             messages.success(request, "Signup successful! Please log in.")
-            return redirect('home')
+            return redirect('dashboard')
         except Exception as e:
             messages.error(request, f"Error creating user: {str(e)}")
             return render(request, 'accounts/signup.html', {'username': username, 'email': email})
@@ -65,7 +65,7 @@ def login_view(request):
         if user is not None:
             login(request, user)
             messages.success(request, f"Welcome back, {user.username}! You are now logged in.")
-            return redirect('home')
+            return redirect('dashboard')
         else:
             messages.error(request, "Invalid username or password!")
             return render(request, "accounts/login.html")

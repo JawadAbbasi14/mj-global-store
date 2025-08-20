@@ -3,5 +3,5 @@ from . import views
 
 urlpatterns = [
 
-      path("",views.product_list,name="products"), 
+      path("",views.home,name="home"), # ← bas empty string lagao
 ]

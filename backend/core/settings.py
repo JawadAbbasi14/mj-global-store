@@ -78,6 +78,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'product',
     'accounts',
+    'home',
 
 ]
 
