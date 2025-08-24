@@ -1,11 +1,93 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>MJ Store</title>
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
 </head>
+
 <body>
-    <h1>home</h1>
+
+    <!-- Navbar -->
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="{% static 'images/mj-logo.png' %}" alt="MJ Store Logo">
+            </div>
+            <ul class="nav-links">
+                <li><a href="{% url 'about' %}">About</a></li>
+                <li><a href="{% url 'contact' %}">Contact</a></li>
+                <li><a href="{% url 'policies' %}">Privacy & Policy</a></li>
+                <li><a href="{% url 'terms' %}">Terms & Conditions</a></li>
+                <li><a href="{% url 'products' %}">Shop</a></li>
+                <li><a href="{% url 'login_view' %}">Login</a></li>
+                <li><a href="{% url 'signup' %}">Signup</a></li>
+                <li><a href="{% url 'logout_view' %}">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-text">
+            <img src="{% static 'images/background_image.jpg' %}"
+                alt="MJ Store background featuring elegant product displays in a luxurious retail setting, conveying a welcoming and sophisticated atmosphere. Text in image: Welcome to MJ Store Shop Smart Stay Classy.">
+
+            <h1>Welcome to MJ Store: Shop Smart, Stay Classy</h1>
+            <p>Experience Luxury, Shop MJ Store!</p>
+            <a class="btn" href="{% url 'products' %}">Shop Now</a>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="featured">
+        <h2>Featured Products</h2>
+        <div class="product-list">
+            <div class="product">
+                <img src="{% static 'images/cosmetic.jpg' %}" alt="Cosmetic Product">
+            </div>
+            <div class="product">
+                <img src="{% static 'images/futuristic_lcd.jpg' %}" alt="Futuristic LCD">
+            </div>
+            <div class="product">
+                <img src="{% static 'images/mens_facewash.jpg' %}" alt="Men's Facewash">
+            </div>
+        </div>
+        <a href="{% url 'products' %}" class="btn">View More</a>
+    </section>
+
+    <!-- Special Offer -->
+    <section class="offer">
+        <img src="{% static 'images/offer-20.png' %}" alt="Special Offer">
+    </section>
+
+    <!-- About Section -->
+    <section class="about">
+        <h2>Why Choose MJ Store?</h2>
+        <p>Discover luxury shopping at MJ Store, where premium quality meets unbeatable style.
+            Experience curated products and a royal vibe tailored just for you!</p>
+        <img src="https://via.placeholder.com/400x200" alt="About MJ Store">
+    </section>
+
+    <!-- Contact -->
+    <section class="contact">
+        <h2>Contact Us</h2>
+        <p>Email: <a href="mailto:jawadabbasi1107@gmail.com">jawadabbasi1107@gmail.com</a></p>
+        <p>Phone: 03435256963</p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 MJ Store</p>
+        <a href="{% url 'contact' %}">Contact</a> |
+        <a href="{% url 'policies' %}">Privacy & Policy</a> |
+        <a href="{% url 'terms' %}">Terms & Conditions</a>
+    </footer>
+
 </body>
+
 </html>
