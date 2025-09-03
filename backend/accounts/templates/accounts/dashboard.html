@@ -17,6 +17,21 @@
                 <span class="site-title">MJ_GLOBAL-STORE</span>
             </a>
             <p class="tagline">Shop Smart • Stay Classy • Be Global</p>
+
+            <!-- Navigation Links in Header -->
+            <nav class="header-nav">
+                <ul class="nav-links">
+                    <li><a href="{% url 'about' %}">About</a></li>
+                    <li><a href="{% url 'contact' %}">Contact</a></li>
+                    <li><a href="{% url 'products' %}">Shop</a></li>
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'logout_view' %}">Logout</a></li>
+                    {% else %}
+                        <li><a href="{% url 'login_view' %}">Login</a></li>
+                        <li><a href="{% url 'signup' %}">Signup</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
         </div>
     </header>
 
@@ -24,7 +39,8 @@
 
         <section class="auth-section card-box">
             <h2 class="section-title">Your Account Access</h2>
-            <div class="separator-line"></div> {% if user.is_authenticated %}
+            <div class="separator-line"></div>
+            {% if user.is_authenticated %}
                 <div class="user-status-area">
                     <p class="welcome-message">Hello, <strong class="username-highlight">{{ user.username }}</strong>! Welcome back. 🎉</p>
                     <a href="{% url 'logout_view' %}" class="btn btn-logout">Logout</a>
@@ -38,10 +54,10 @@
             {% endif %}
         </section>
 
-
         <section class="benefits-section card-box feature-list">
             <h3 class="section-subtitle">Unlock Premium Benefits Today:</h3>
-            <div class="separator-line"></div> <ul class="benefit-points">
+            <div class="separator-line"></div>
+            <ul class="benefit-points">
                 <li class="benefit-item">
                     <span class="icon">💎</span> Exclusive member discounts
                 </li>
@@ -56,7 +72,6 @@
                 </li>
             </ul>
         </section>
-
 
         {% if messages %}
             <section class="messages-area">
@@ -73,13 +88,16 @@
 
     <footer class="site-footer">
         <div class="footer-content-wrapper">
-            <div class="separator-line"></div> <p class="copyright">&copy; 2025 MJ_GLOBAL-STORE. All rights reserved.</p>
+            <div class="separator-line"></div>
+            <p class="copyright">&copy; 2025 MJ_GLOBAL-STORE. All rights reserved.</p>
             <nav class="footer-nav">
-                <a href="#" class="footer-link">About Us</a>
+                <a href="{% url 'about' %}">About</a>
                 <span class="separator">|</span>
-                <a href="#" class="footer-link">Contact Support</a>
+                <a href="{% url 'contact' %}">Contact Us</a>
                 <span class="separator">|</span>
-                <a href="#" class="footer-link">Privacy Policy</a>
+                <a href="{% url 'policies' %}">Privacy & Policy</a>
+                <span class="separator">|</span>
+                <a href="{% url 'terms' %}">Terms & Conditions</a>
             </nav>
         </div>
     </footer>

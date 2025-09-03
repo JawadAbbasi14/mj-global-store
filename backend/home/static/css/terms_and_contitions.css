@@ -1,0 +1,120 @@
+/* ------------------------------------ */
+/* General Styles */
+/* ------------------------------------ */
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    color: #4a4a4a; /* Slightly softer text color */
+    background-color: #f5f7fa; /* Lighter, more modern background */
+    margin: 0;
+    padding: 0;
+}
+
+/* ------------------------------------ */
+/* Main Container */
+/* ------------------------------------ */
+.terms-container {
+    max-width: 960px;
+    margin: 40px auto;
+    padding: 40px;
+    background: #ffffff;
+    border-radius: 16px; /* More rounded corners */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* Stronger, more elegant shadow */
+}
+
+/* ------------------------------------ */
+/* Typography */
+/* ------------------------------------ */
+h1 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: #0d1a26; /* Darker navy for a stronger header */
+    text-align: center;
+    padding-bottom: 20px;
+    border-bottom: 3px solid #e3e8ed; /* Thicker, more prominent line */
+    margin-bottom: 20px;
+}
+
+h2, h3 {
+    color: #1a3250; /* Slightly lighter navy for subheadings */
+    margin-top: 30px;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+}
+
+p, ul {
+    font-size: 1rem;
+    color: #555; /* Neutral body text color */
+}
+
+/* ------------------------------------ */
+/* Lists */
+/* ------------------------------------ */
+ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin-bottom: 20px;
+}
+
+ul li {
+    position: relative;
+    padding-left: 30px; /* More space for the bullet */
+    margin-bottom: 12px;
+}
+
+ul li::before {
+    content: '→'; /* A more modern arrow icon */
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #3b82f6; /* A more vibrant, trusting blue */
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+/* ------------------------------------ */
+/* Links */
+/* ------------------------------------ */
+a {
+    color: #3b82f6;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+a:hover {
+    color: #e67e22; /* Burnt orange for a strong hover effect */
+    text-decoration: underline;
+    text-shadow: 0 0 5px rgba(230, 126, 34, 0.4);
+}
+
+/* ------------------------------------ */
+/* Horizontal Rule for Section Separation */
+/* ------------------------------------ */
+hr {
+    border: none;
+    height: 1px;
+    background-color: #e0e0e0;
+    margin: 40px 0;
+}
+
+/* ------------------------------------ */
+/* Footer */
+/* ------------------------------------ */
+footer {
+    text-align: center;
+    padding: 30px;
+    margin-top: 50px;
+    border-top: 1px solid #e0e0e0;
+    color: #777;
+    font-size: 0.9rem;
+}

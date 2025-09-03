@@ -14,3 +14,6 @@ def privecy_and_policy(request):
 
 def terms_and_contitions(request):
     return render(request,"home/terms_and_contitions.html")
+
+def help(request):
+    return render(request,"home/help.html")

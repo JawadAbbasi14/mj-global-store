@@ -1,93 +1,194 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <title>MJ Store</title>
-        <link rel="stylesheet" href="{% static 'css/style.css' %}">
-<link rel="stylesheet" href="{% static 'css/home.css' %}">
-</head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to MJ Store | Premium Quality Products</title>
+    <meta name="description" content="Shop luxury electronics, jewellery, fragrance & skincare at MJ Store. Premium quality, royal experience.">
 
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+</head>
 <body>
 
-    <!-- Navbar -->
+    <!-- Navigation -->
     <header>
         <nav>
-            <div class="logo">
-                <img src="{% static 'images/mj-logo.png' %}" alt="MJ Store Logo">
-            </div>
             <ul class="nav-links">
+                <li><a href="{% url 'home' %}" class="active">Home</a></li>
                 <li><a href="{% url 'about' %}">About</a></li>
                 <li><a href="{% url 'contact' %}">Contact</a></li>
-                <li><a href="{% url 'policies' %}">Privacy & Policy</a></li>
-                <li><a href="{% url 'terms' %}">Terms & Conditions</a></li>
                 <li><a href="{% url 'products' %}">Shop</a></li>
-                <li><a href="{% url 'login_view' %}">Login</a></li>
-                <li><a href="{% url 'signup' %}">Signup</a></li>
-                <li><a href="{% url 'logout_view' %}">Logout</a></li>
+                <li><a href="{% url 'help' %}">Help</a></li>
+
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'logout_view' %}">Logout</a></li>
+                {% else %}
+                    <li><a href="{% url 'login_view' %}">Login</a></li>
+                    <li><a href="{% url 'signup' %}">Signup</a></li>
+                {% endif %}
             </ul>
         </nav>
     </header>
 
     <!-- Hero Section -->
     <section class="hero">
-        <div class="hero-text">
-            <img src="{% static 'images/background_image.jpg' %}"
-                alt="MJ Store background featuring elegant product displays in a luxurious retail setting, conveying a welcoming and sophisticated atmosphere. Text in image: Welcome to MJ Store Shop Smart Stay Classy.">
-
-            <h1>Welcome to MJ Store: Shop Smart, Stay Classy</h1>
-            <p>Experience Luxury, Shop MJ Store!</p>
-            <a class="btn" href="{% url 'products' %}">Shop Now</a>
+        <div class="hero-background">
+            <img src="{% static 'images/background_image.jpg' %}" alt="Luxury product display at MJ Store" aria-hidden="true">
+        </div>
+        <div class="hero-content">
+            <h1>Welcome to MJ Store</h1>
+            <p class="tagline">Shop Smart. Stay Classy. Experience Luxury.</p>
+            <a href="{% url 'products' %}" class="btn btn-primary">Shop Now</a>
         </div>
     </section>
 
-    <!-- Featured Products -->
+    <!-- Featured Categories -->
     <section class="featured">
-        <h2>Featured Products</h2>
-        <div class="product-list">
-            <div class="product">
-                <img src="{% static 'images/cosmetic.jpg' %}" alt="Cosmetic Product">
-            </div>
-            <div class="product">
-                <img src="{% static 'images/futuristic_lcd.jpg' %}" alt="Futuristic LCD">
-            </div>
-            <div class="product">
-                <img src="{% static 'images/mens_facewash.jpg' %}" alt="Men's Facewash">
+        <div class="section-header">
+            <h2>Our Premium Collections</h2>
+            <p>Curated for those who value quality, style, and exclusivity.</p>
+        </div>
+
+        <!-- Electronics -->
+        <div class="category-section">
+            <h3>Electronics</h3>
+            <div class="product-grid">
+                <div class="product-card">
+                    <img src="{% static 'images/electronic1.jpg' %}" alt="Wireless Noise-Canceling Headphones">
+                    <h4>Premium Headphones</h4>
+                    <p>Crystal-clear audio with advanced noise cancellation.</p>
+                </div>
+                <div class="product-card">
+                    <img src="{% static 'images/electronic2.jpg' %}" alt="Smart Watch">
+                    <h4>Luxury Smartwatch</h4>
+                    <p>Track fitness, calls, and style in one sleek device.</p>
+                </div>
+                <div class="product-card">
+                    <img src="{% static 'images/electronic3.jpg' %}" alt="Portable Charger">
+                    <h4>Ultra-Fast Charger</h4>
+                    <p>Power on the go with 3x faster charging.</p>
+                </div>
             </div>
         </div>
-        <a href="{% url 'products' %}" class="btn">View More</a>
+
+        <!-- Jewellery -->
+        <div class="category-section">
+            <h3>Jewellery</h3>
+            <div class="product-grid">
+                <div class="product-card">
+                    <img src="{% static 'images/Jewellery1.jpg' %}" alt="Gold Pendant Necklace">
+                    <h4>Gold Pendant</h4>
+                    <p>18K gold with diamond accents — timeless elegance.</p>
+                </div>
+                <div class="product-card">
+                    <img src="{% static 'images/Jewellery3.jpg' %}" alt="Diamond Stud Earrings">
+                    <h4>Diamond Earrings</h4>
+                    <p>Perfect sparkle for every occasion.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fragrance -->
+        <div class="category-section">
+            <h3>Fragrance</h3>
+            <div class="product-grid">
+                <div class="product-card">
+                    <img src="{% static 'images/perfoume1.jpg' %}" alt="Signature Men's Cologne">
+                    <h4>Signature Cologne</h4>
+                    <p>Confidence in a bottle — bold and sophisticated.</p>
+                </div>
+                <div class="product-card">
+                    <img src="{% static 'images/perfoume2.jpg' %}" alt="Floral Women's Perfume">
+                    <h4>Floral Eau de Parfum</h4>
+                    <p>Elegant, long-lasting floral notes for the modern woman.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Skincare -->
+        <div class="category-section">
+            <h3>Skin Care</h3>
+            <div class="product-grid">
+                <div class="product-card">
+                    <img src="{% static 'images/beauti1.jpg' %}" alt="Anti-Aging Serum">
+                    <h4>Anti-Aging Serum</h4>
+                    <p>Reduce wrinkles, restore glow — dermatologist-approved.</p>
+                </div>
+                <div class="product-card">
+                    <img src="{% static 'images/beauti2.jpg' %}" alt="Hydrating Face Mask">
+                    <h4>Hydrating Face Mask</h4>
+                    <p>Deep moisture for soft, radiant skin.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center">
+            <a href="{% url 'products' %}" class="btn btn-secondary">View All Collections</a>
+        </div>
     </section>
 
-    <!-- Special Offer -->
+    <!-- Special Offer Banner -->
     <section class="offer">
-        <img src="{% static 'images/offer-20.png' %}" alt="Special Offer">
+        <div class="offer-content">
+            <h2>Special Offer: Get 20% Off!</h2>
+            <p>Limited time only — elevate your style with exclusive discounts.</p>
+            <a href="{% url 'products' %}?discount=20" class="btn btn-primary">Claim Offer</a>
+        </div>
+        <div class="offer-image">
+            <img src="{% static 'images/offer-20.png' %}" alt="20% Off Special Offer at MJ Store">
+        </div>
     </section>
 
-    <!-- About Section -->
+    <!-- Why Choose Us -->
     <section class="about">
-        <h2>Why Choose MJ Store?</h2>
-        <p>Discover luxury shopping at MJ Store, where premium quality meets unbeatable style.
-            Experience curated products and a royal vibe tailored just for you!</p>
-        <img src="https://via.placeholder.com/400x200" alt="About MJ Store">
+        <div class="about-content">
+            <div class="about-text">
+                <h2>Why Choose MJ Store?</h2>
+                <p>At <strong>MJ Store</strong>, we don’t just sell products — we deliver a luxury experience. Every item is hand-curated for quality, style, and lasting value.</p>
+                <ul class="benefits">
+                    <li>✅ Premium Quality Guaranteed</li>
+                    <li>✅ Fast & Secure Delivery</li>
+                    <li>✅ Easy Returns & Refunds</li>
+                    <li>✅ 24/7 Customer Support</li>
+                </ul>
+            </div>
+            <div class="about-image">
+                <img src="https://via.placeholder.com/500x300" alt="MJ Store quality assurance and customer satisfaction">
+            </div>
+        </div>
     </section>
 
-    <!-- Contact -->
+    <!-- Contact CTA -->
     <section class="contact">
-        <h2>Contact Us</h2>
-        <p>Email: <a href="mailto:jawadabbasi1107@gmail.com">jawadabbasi1107@gmail.com</a></p>
-        <p>Phone: 03435256963</p>
+        <div class="contact-content">
+            <h2>Need Help? We're Here for You</h2>
+            <p>
+                <strong>Email:</strong> <a href="mailto:jawadabbasi1107@gmail.com">jawadabbasi1107@gmail.com</a><br>
+                <strong>Phone:</strong> 0343-5256963
+            </p>
+            <a href="{% url 'contact' %}" class="btn btn-secondary">Send Message</a>
+        </div>
     </section>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2025 MJ Store</p>
-        <a href="{% url 'contact' %}">Contact</a> |
-        <a href="{% url 'policies' %}">Privacy & Policy</a> |
-        <a href="{% url 'terms' %}">Terms & Conditions</a>
+        <p>&copy; 2025 MJ Store. All rights reserved.</p>
+        <nav class="footer-links">
+            <a href="{% url 'contact' %}">Contact Us</a> |
+            <a href="{% url 'policies' %}">Privacy Policy</a> |
+            <a href="{% url 'terms' %}">Terms of Service</a> |
+            <a href="{% url 'help' %}">Help Center</a>
+        </nav>
     </footer>
 
 </body>
-
 </html>

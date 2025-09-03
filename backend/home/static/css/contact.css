@@ -1,0 +1,367 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.7;
+    color: #333;
+    background-color: #f9f9f9;
+}
+
+/* Header & Navigation */
+header {
+    background-color: #0f1a2c;
+    padding: 1rem 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    padding: 0.5rem;
+}
+
+.nav-links a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1rem;
+    transition: color 0.3s;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+}
+
+.nav-links a:hover {
+    color: #ffd700; /* Amazon gold */
+}
+
+.nav-links a.active {
+    background-color: #ff9900;
+    color: white;
+    font-weight: 600;
+}
+
+/* Main Container */
+.contact-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+}
+
+/* Hero Section */
+.hero-section {
+    text-align: center;
+    padding: 3rem 1rem;
+    background: linear-gradient(135deg, #0f1a2c 0%, #1a237e 100%);
+    color: white;
+    border-radius: 12px;
+    margin-bottom: 2.5rem;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.hero-section h1 {
+    font-size: 2.8rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.hero-text {
+    max-width: 700px;
+    margin: 0 auto;
+    font-size: 1.1rem;
+    opacity: 0.95;
+}
+
+/* Contact Options */
+.contact-options h2 {
+    font-size: 2.2rem;
+    color: #0f1a2c;
+    margin-bottom: 1.8rem;
+    text-align: center;
+    font-weight: 600;
+}
+
+.options-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.8rem;
+    margin-top: 1.5rem;
+}
+
+.option-card {
+    background-color: white;
+    padding: 1.8rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.option-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.option-icon {
+    font-size: 3rem;
+    margin-bottom: 0.8rem;
+}
+
+.option-card h3 {
+    color: #0f1a2c;
+    margin-bottom: 0.6rem;
+}
+
+.option-card p {
+    color: #555;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.option-card a {
+    color: #0066c0;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.option-card a:hover {
+    text-decoration: underline;
+    color: #00468b;
+}
+
+.chat-button {
+    display: inline-block;
+    margin-top: 0.8rem;
+    padding: 10px 20px;
+    background-color: #0066c0;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    transition: background-color 0.3s;
+}
+
+.chat-button:hover {
+    background-color: #00468b;
+}
+
+/* Contact Form Section */
+.contact-form-section {
+    background-color: white;
+    padding: 2.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    margin-bottom: 3rem;
+}
+
+.contact-form-section h2 {
+    font-size: 2.2rem;
+    color: #0f1a2c;
+    margin-bottom: 0.8rem;
+    text-align: center;
+}
+
+.contact-form-section p {
+    text-align: center;
+    color: #555;
+    margin-bottom: 1.8rem;
+    font-size: 1.05rem;
+}
+
+.contact-form {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #1a237e;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #0066c0;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 102, 192, 0.2);
+}
+
+.submit-button {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    background-color: #ff9900;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 500;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 0.5rem;
+}
+
+.submit-button:hover {
+    background-color: #e08800;
+    transform: translateY(-1px);
+}
+
+/* FAQ Section */
+.faq-section {
+    margin-bottom: 3rem;
+}
+
+.faq-section h2 {
+    font-size: 2.2rem;
+    color: #0f1a2c;
+    margin-bottom: 1.8rem;
+    text-align: center;
+    font-weight: 600;
+}
+
+.faq-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.faq-item {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+}
+
+.faq-item h3 {
+    color: #1a237e;
+    margin-bottom: 0.6rem;
+    font-size: 1.2rem;
+}
+
+.faq-item p {
+    color: #555;
+    line-height: 1.7;
+}
+
+/* Office Locations */
+.location-section h2 {
+    font-size: 2.2rem;
+    color: #0f1a2c;
+    margin-bottom: 1.8rem;
+    text-align: center;
+    font-weight: 600;
+}
+
+.locations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.8rem;
+}
+
+.location-card {
+    background-color: white;
+    padding: 1.8rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    text-align: center;
+}
+
+.location-card h3 {
+    color: #0f1a2c;
+    margin-bottom: 0.6rem;
+    font-size: 1.3rem;
+}
+
+.location-card p {
+    color: #555;
+    line-height: 1.7;
+    white-space: pre-line;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 2rem 1rem;
+    background-color: #0f1a2c;
+    color: #bbb;
+    font-size: 0.95rem;
+    margin-top: 3rem;
+}
+
+footer p {
+    margin-bottom: 0.5rem;
+}
+
+footer a {
+    color: #ddd;
+    text-decoration: none;
+    margin: 0 0.7rem;
+}
+
+footer a:hover {
+    color: #ffd700;
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-section h1 {
+        font-size: 2.2rem;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .options-grid,
+    .faq-list,
+    .locations-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-container {
+        padding: 0 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-text {
+        font-size: 1rem;
+    }
+
+    .contact-form-section h2,
+    .faq-section h2,
+    .location-section h2 {
+        font-size: 1.8rem;
+    }
+
+    .submit-button {
+        font-size: 1rem;
+    }
+}

@@ -4,6 +4,7 @@ class Products(models.Model):
     price = models.IntegerField()
     stock = models.IntegerField(default=0)
     description = models.TextField(max_length=1000)
+    image = models.ImageField(upload_to='products/', blank=True, null=True)  
 
 
 

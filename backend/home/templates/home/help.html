@@ -1,0 +1,218 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M-J | Help Center</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/help.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+    <nav>
+        <ul class="nav-links">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'about' %}">About</a></li>
+            <li><a href="{% url 'contact' %}">Contact</a></li>
+            <li><a href="{% url 'products' %}">Shop</a></li>
+            <li><a href="{% url 'help' %}">Help</a></li>
+
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'logout_view' %}">Logout</a></li>
+            {% else %}
+                <li><a href="{% url 'login_view' %}">Login</a></li>
+                <li><a href="{% url 'signup' %}">Signup</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</header>
+
+    <main class="help-container">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <h1>How Can We Help You?</h1>
+            <div class="hero-content">
+                <p class="hero-text">
+                    Welcome to the M-J Store Help Center. Find answers to common questions,
+                    learn how to shop and sell, and get support whenever you need it.
+                </p>
+                <form class="search-bar">
+                    <input type="text" placeholder="Search for help..." aria-label="Search help articles">
+                    <button type="submit">Search</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Help Categories -->
+        <section class="category-section">
+            <h2>Popular Topics</h2>
+            <div class="category-grid">
+                <a href="#shopping-guide" class="category-card">
+                    <div class="category-icon">🛒</div>
+                    <h3>Shopping Guide</h3>
+                    <p>How to browse, buy, and track your orders</p>
+                </a>
+                <a href="#selling-center" class="category-card">
+                    <div class="category-icon">💰</div>
+                    <h3>Selling Center</h3>
+                    <p>List products, manage inventory, and grow your store</p>
+                </a>
+                <a href="#payments" class="category-card">
+                    <div class="category-icon">💳</div>
+                    <h3>Payments & Refunds</h3>
+                    <p>Learn about payment methods, refunds, and payouts</p>
+                </a>
+                <a href="#shipping" class="category-card">
+                    <div class="category-icon">🚚</div>
+                    <h3>Shipping & Delivery</h3>
+                    <p>Delivery times, tracking, and international shipping</p>
+                </a>
+                <a href="#returns" class="category-card">
+                    <div class="category-icon">🔄</div>
+                    <h3>Returns & Exchanges</h3>
+                    <p>How to return an item and get a refund</p>
+                </a>
+                <a href="#account-support" class="category-card">
+                    <div class="category-icon">👤</div>
+                    <h3>Account Help</h3>
+                    <p>Login issues, profile settings, and security</p>
+                </a>
+            </div>
+        </section>
+
+        <!-- Detailed Help Sections -->
+        <section class="help-content">
+            <div id="shopping-guide">
+                <h2>Shopping Guide</h2>
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <h3>How do I place an order?</h3>
+                        <p>Go to the product page, select options (size, color, etc.), and click "Add to Cart". Then proceed to checkout and confirm your shipping and payment details.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>Can I modify or cancel my order?</h3>
+                        <p>You can cancel your order within 30 minutes of purchase if it hasn’t shipped. Go to <strong>My Orders</strong> in your account to check status and request cancellation.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>How do I track my order?</h3>
+                        <p>Once shipped, you’ll receive a tracking number via email. You can also view it in your <strong>Order History</strong> under "My Account".</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="selling-center">
+                <h2>Selling Center</h2>
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <h3>How do I become a seller?</h3>
+                        <p>Click on "Sell on M-J" in the footer or top menu, sign up, verify your identity, and start listing products in minutes.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>Are there any fees to sell?</h3>
+                        <p>We charge a small 5% commission on each sale. Listing is free, and there are no monthly subscription fees.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>How do I upload products?</h3>
+                        <p>Log in to your Seller Dashboard, click "Add Product", fill in details, upload images, and publish. Your item goes live instantly.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="payments">
+                <h2>Payments & Refunds</h2>
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <h3>What payment methods do you accept?</h3>
+                        <p>We accept major credit/debit cards, PayPal, Apple Pay, Google Pay, and bank transfers for bulk orders.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>When will I receive a refund?</h3>
+                        <p>Once we receive your return, refunds are processed within 3–5 business days. It may take 5–10 days to appear in your account.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>How do sellers get paid?</h3>
+                        <p>Sellers are paid every Tuesday for orders shipped the previous week. Payouts go directly to your linked bank account or PayPal.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="shipping">
+                <h2>Shipping & Delivery</h2>
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <h3>How long does shipping take?</h3>
+                        <p>Domestic orders: 2–5 business days. International: 7–14 business days depending on location.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>Do you offer express delivery?</h3>
+                        <p>Yes! Select "Express Shipping" at checkout for 1–2 day delivery (available in select regions).</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>Who handles shipping?</h3>
+                        <p>Sellers can choose their own courier or use our partnered logistics network for discounted rates and tracking.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="returns">
+                <h2>Returns & Exchanges</h2>
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <h3>What is your return policy?</h3>
+                        <p>You can return most new, unused items within 30 days. Items must be in original packaging with tags attached.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>How do I start a return?</h3>
+                        <p>Go to <strong>My Orders</strong>, select the item, and click "Request Return". Print the label and ship it back.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>Are return shipping fees covered?</h3>
+                        <p>If the item is defective or incorrect, we cover return shipping. For buyer's remorse, return shipping is the customer’s responsibility.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="account-support">
+                <h2>Account Help</h2>
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <h3>I forgot my password. What should I do?</h3>
+                        <p>Click "Login" > "Forgot Password", enter your email, and we'll send a reset link.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>How do I update my email or password?</h3>
+                        <p>Go to <strong>Account Settings</strong> after logging in. You can edit your profile, password, and notification preferences.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>Is my account secure?</h3>
+                        <p>Yes. We use encryption, two-factor authentication (optional), and monitor for suspicious activity to keep your data safe.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Need More Help? -->
+        <section class="final-cta">
+            <h2>Still Need Help?</h2>
+            <p>Our support team is always ready to assist you.</p>
+            <div class="cta-buttons">
+                <a href="{% url 'contact' %}" class="cta-button">Contact Us</a>
+                <a href="#" class="chat-link">Start Live Chat</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2023 M-J Store. All rights reserved.</p>
+        <p>
+            <a href="{% url 'policies' %}">Privacy Policy</a> |
+            <a href="{% url 'terms' %}">Terms of Service</a> |
+            <a href="{% url 'about' %}">About Us</a>
+        </p>
+    </footer>
+</body>
+</html>

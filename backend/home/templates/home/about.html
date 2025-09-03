@@ -5,12 +5,266 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>M-J | about</title>
+    <title>M-J | About Us</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="{% static 'css/about.css' %}">
 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
-<h1>ABOUT PAGE</h1>
+<header>
+    <nav>
+        <ul class="nav-links">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'about' %}">About</a></li>
+            <li><a href="{% url 'contact' %}">Contact</a></li>
+            <li><a href="{% url 'products' %}">Shop</a></li>
+            <li><a href="{% url 'help' %}">Help</a></li>
+
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'logout_view' %}">Logout</a></li>
+            {% else %}
+                <li><a href="{% url 'login_view' %}">Login</a></li>
+                <li><a href="{% url 'signup' %}">Signup</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</header>
+
+
+
+    <main class="about-container">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <h1>About M-J Store</h1>
+            <div class="hero-content">
+                <p class="hero-text">
+                    M-J Store is more than just an online marketplace — we're a global community where creativity meets commerce.
+                    Whether you're a passionate seller, a small business owner, or a shopper looking for unique, high-quality products,
+                    our platform is designed to connect, inspire, and deliver value with every click.
+                </p>
+                <p class="hero-text">
+                    We believe in empowering individuals to turn their ideas into income, and shoppers to discover products they won't find anywhere else.
+                    With millions of users worldwide, we’re redefining what it means to buy and sell online.
+                </p>
+                <a href="{% url 'contact' %}" class="cta-button">Contact Me</a>
+            </div>
+        </section>
+
+        <!-- Our Story -->
+        <section class="story-section">
+            <div class="story-content">
+                <h2>Our Story</h2>
+                <p>
+                    M-J Store was founded in 2023 by a team of tech enthusiasts and entrepreneurs who saw a gap in the e-commerce world.
+                    While large platforms dominated the market, independent creators, artisans, and small sellers struggled to stand out
+                    and maintain control over their businesses.
+                </p>
+                <p>
+                    We envisioned a fairer, more transparent marketplace — one that puts people first. Starting from a small garage office
+                    with just three team members and a bold idea, we launched M-J Store as a simple peer-to-peer selling platform.
+                </p>
+                <p>
+                    Today, we serve over 500,000 active sellers and 2 million monthly shoppers across 120 countries.
+                    Our growth has been fueled not by ads, but by trust, word-of-mouth, and a relentless focus on user experience.
+                </p>
+                <p>
+                    We're proud of how far we've come, but we're even more excited about where we're going.
+                </p>
+            </div>
+        </section>
+
+        <!-- Mission & Vision -->
+        <section class="mission-section">
+            <div class="mission-content">
+                <div class="mission-item">
+                    <h3>Our Mission</h3>
+                    <p>
+                        To empower every individual to turn their passion into a livelihood by providing a secure, intuitive,
+                        and inclusive platform for buying and selling. We aim to lower the barriers to entrepreneurship and help
+                        small businesses thrive in the digital economy.
+                    </p>
+                </div>
+                <div class="mission-item">
+                    <h3>Our Vision</h3>
+                    <p>
+                        To become the most trusted and user-centric online marketplace in the world — where innovation,
+                        community, and integrity drive every decision. We envision a future where anyone, anywhere,
+                        can start a business with just an idea and an internet connection.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Core Values -->
+        <section class="values-section">
+            <h2>Our Core Values</h2>
+            <div class="values-list">
+                <div class="value-item">
+                    <h3>Empowerment</h3>
+                    <p>
+                        We believe everyone deserves the opportunity to succeed. We provide tools, resources, and support
+                        to help sellers grow, market, and manage their businesses with confidence.
+                    </p>
+                </div>
+                <div class="value-item">
+                    <h3>Transparency</h3>
+                    <p>
+                        No hidden fees, no fine print. We believe in clear policies, honest communication, and open practices
+                        that build lasting trust with our users.
+                    </p>
+                </div>
+                <div class="value-item">
+                    <h3>Innovation</h3>
+                    <p>
+                        We continuously improve our platform with cutting-edge technology, from AI-powered recommendations
+                        to seamless mobile experiences, ensuring we stay ahead of the digital curve.
+                    </p>
+                </div>
+                <div class="value-item">
+                    <h3>Community</h3>
+                    <p>
+                        M-J Store is built by and for its users. We foster a supportive, inclusive community where feedback
+                        is valued, collaboration is encouraged, and everyone has a voice.
+                    </p>
+                </div>
+                <div class="value-item">
+                    <h3>Sustainability</h3>
+                    <p>
+                        We’re committed to reducing our environmental impact. From promoting eco-friendly products to
+                        optimizing shipping routes and supporting carbon-neutral delivery options, sustainability is at
+                        the heart of our operations.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- What We Offer -->
+        <section class="features-section">
+            <h2>What We Offer</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🛒</div>
+                    <h3>Easy Shopping</h3>
+                    <p>
+                        With intuitive navigation, smart filters, and personalized recommendations, finding the perfect product
+                        has never been easier. Shop with confidence knowing every item is backed by our buyer protection policy.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h3>Sell Effortlessly</h3>
+                    <p>
+                        List your products in minutes with our step-by-step seller dashboard. Access analytics, manage inventory,
+                        and process orders — all from one simple, powerful interface.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>Secure Transactions</h3>
+                    <p>
+                        Your safety is our priority. All payments are encrypted and processed through trusted gateways.
+                        Our dispute resolution team is always ready to assist if issues arise.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🚚</div>
+                    <h3>Fast & Reliable Delivery</h3>
+                    <p>
+                        Partnering with top logistics providers, we ensure timely and trackable delivery across cities and continents.
+                        Real-time updates keep you informed every step of the way.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💬</div>
+                    <h3>24/7 Customer Support</h3>
+                    <p>
+                        Got a question? Our support team is available around the clock via chat, email, and phone.
+                        We’re here to help buyers and sellers alike.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌍</div>
+                    <h3>Global Reach</h3>
+                    <p>
+                        Sell to customers in over 120 countries. Our multi-currency and multi-language support makes
+                        international selling simple and accessible.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+       <!-- Creator Spotlight -->
+<section class="creator-section">
+    <h2>Meet the Creator</h2>
+    <p class="creator-intro">
+        M-J Store is not the result of a large corporate team — it’s a vision turned reality by one dedicated creator.
+        Every page, every feature, and every detail has been crafted with passion, persistence, and precision.
+    </p>
+    <div class="creator-card">
+        <img src="{% static 'images/jawad.jpg' %}" alt="JawaD — Founder & Full-Stack Developer" class="creator-photo">
+        <div class="creator-info">
+            <h3>JawaD</h3>
+            <p class="role">Founder & Full-Stack Developer</p>
+            <p class="bio">
+                I believe technology should empower people — not complicate their lives.
+                With M-J Store, my goal is to create a platform that is elegant, fast, and meaningful.
+                This is not just code — this is a journey of turning ideas into impact.
+            </p>
+        </div>
+    </div>
+</section>
+
+
+        <!-- Customer Promise -->
+        <section class="promise-section">
+            <h2>Our Promise to You</h2>
+            <p>
+                At M-J Store, we don’t just facilitate transactions — we build relationships. Whether you're buying a handmade gift
+                or launching your first product, we’re here to support you every step of the way.
+            </p>
+            <p>
+                We promise:
+            </p>
+            <ul>
+                <li>Fair and equal opportunities for all sellers.</li>
+                <li>100% authentic products and transparent seller ratings.</li>
+                <li>No unauthorized reselling or counterfeit goods.</li>
+                <li>Fast resolution of disputes and refunds when needed.</li>
+                <li>Continuous investment in platform safety and performance.</li>
+            </ul>
+        </section>
+
+        <!-- Community & Impact -->
+        <section class="impact-section">
+            <h2>Community & Social Impact</h2>
+            <p>
+                We believe businesses should do more than make money — they should make a difference. That’s why we run the
+                <strong>M-J Empowers</strong> initiative, supporting underrepresented entrepreneurs with free training,
+                reduced fees, and mentorship programs.
+            </p>
+            <p>
+                We’ve helped over 5,000 women, students, and minority-owned businesses launch online stores.
+                Additionally, 1% of our annual profits go toward digital literacy programs in underserved communities.
+            </p>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <h2>Need Something Specific?</h2>
+            <p>Visit our <a href="{% url 'contact' %}" class="cta-link">Contact page</a> if you want to request a product, report an issue, or explore partnership opportunities!</p>
+            <p>Want to join our team? Check out our <a href="#" class="cta-link">Careers page</a> for open positions.</p>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2023 M-J Store. All rights reserved.</p>
+        <p>
+            <a href="{% url 'policies' %}">Privacy Policy</a> |
+            <a href="{% url 'terms' %}">Terms of Service</a> |
+
+        </p>
+    </footer>
 </body>
 </html>

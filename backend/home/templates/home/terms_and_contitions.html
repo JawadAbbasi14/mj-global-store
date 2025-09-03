@@ -1,16 +1,92 @@
-
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>M-J | Trems_&_conditions</title>
+    <title>M-J | Terms & Conditions</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-<link rel="stylesheet" href="{% static 'css/terms_and_conditions.css' %}">
-
+    <link rel="stylesheet" href="{% static 'css/terms_and_contitions.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
-<h1>Trems_&_conditions PAGE</h1>
+    <!-- Navbar -->
+    <header>
+    <nav>
+        <ul class="nav-links">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'about' %}">About</a></li>
+            <li><a href="{% url 'contact' %}">Contact</a></li>
+            <li><a href="{% url 'products' %}">Shop</a></li>
+            <li><a href="{% url 'help' %}">Help</a></li>
+
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'logout_view' %}">Logout</a></li>
+            {% else %}
+                <li><a href="{% url 'login_view' %}">Login</a></li>
+                <li><a href="{% url 'signup' %}">Signup</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</header>
+
+    <main class="terms-container">
+        <h1>Terms & Conditions</h1>
+        <p>Last updated: [Date of Last Update]</p>
+
+        <h2>1. Introduction</h2>
+        <p>
+            Welcome to M-J Store, operated by Jawad (aged 20). These terms and conditions outline the rules and regulations for the use of our website, located at [Your Website URL]. By accessing this website, we assume you accept these terms and conditions. Do not continue to use M-J Store if you do not agree to all of the terms and conditions stated on this page.
+        </p>
+
+        <h2>2. User Accounts</h2>
+        <p>
+            To use certain features of the site, you may need to register an account. You are responsible for maintaining the confidentiality of your account information and for all activities that occur under your account. You agree to provide accurate and complete information and to keep your password secure.
+        </p>
+
+        <h2>3. Intellectual Property</h2>
+        <p>
+            The content on M-J Store, including all text, graphics, logos, images, and software, is the property of M-J Store and is protected by copyright and intellectual property laws. You may not use, reproduce, or distribute any content from this site without our express written permission.
+        </p>
+
+        <h2>4. Marketplace & Sales</h2>
+        <p>
+            M-J Store is an online marketplace connecting buyers and sellers. We act as a platform and are not the direct seller of products unless explicitly stated.
+        </p>
+        <ul>
+            <li><strong>Product Descriptions:</strong> While we aim for accuracy, we do not warrant that product descriptions or other content are error-free.</li>
+            <li><strong>Third-Party Sellers:</strong> We are not responsible for the quality, safety, or legality of products listed by third-party sellers. Any disputes should be resolved directly with the seller.</li>
+            <li><strong>Pricing:</strong> All prices are subject to change without notice. We reserve the right to refuse or cancel any order for any reason.</li>
+        </ul>
+
+        <h2>5. Prohibited Use</h2>
+        <p>You agree not to use the M-J Store for any of the following purposes:</p>
+        <ul>
+            <li>To post or transmit any unlawful, harassing, defamatory, or obscene content.</li>
+            <li>To engage in any fraudulent activity or illegal transactions.</li>
+            <li>To use bots, viruses, or any other software to interfere with the proper functioning of the site.</li>
+            <li>To infringe upon the intellectual property rights of M-J Store or any third party.</li>
+        </ul>
+
+        <h2>6. Limitation of Liability</h2>
+        <p>
+            To the fullest extent permitted by law, M-J Store will not be liable for any damages, whether direct, indirect, incidental, or consequential, arising from your use of the website or any products purchased through it.
+        </p>
+
+        <h2>7. Governing Law</h2>
+        <p>
+            These terms and conditions are governed by the laws of [Your Country/State]. Any disputes arising from these terms shall be subject to the exclusive jurisdiction of the courts in [Your City/Region].
+        </p>
+
+        <h2>8. Contact Information</h2>
+        <p>
+            If you have any questions about these terms, please contact us at [Your Email Address].
+        </p>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 M-J Store. All rights reserved.</p>
+    </footer>
+
 </body>
 </html>

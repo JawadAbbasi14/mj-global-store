@@ -5,12 +5,155 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>M-J | contact</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-<link rel="stylesheet" href="{% static 'css/contact.css' %}">
+    <title>M-J | Contact Us</title>
+     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/contact.css' %}">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+
 
 </head>
 <body>
-<h1>Contact PAGE</h1>
+   <header>
+    <nav>
+        <ul class="nav-links">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'about' %}">About</a></li>
+            <li><a href="{% url 'contact' %}">Contact</a></li>
+            <li><a href="{% url 'products' %}">Shop</a></li>
+            <li><a href="{% url 'help' %}">Help</a></li>
+
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'logout_view' %}">Logout</a></li>
+            {% else %}
+                <li><a href="{% url 'login_view' %}">Login</a></li>
+                <li><a href="{% url 'signup' %}">Signup</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</header>
+
+    <main class="contact-container">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <h1>Contact M-J Store</h1>
+            <div class="hero-content">
+                <p class="hero-text">
+                    Have questions, feedback, or need help with your order? We're here for you.
+                    Reach out to our team anytime — we respond within 24 hours.
+                </p>
+            </div>
+        </section>
+
+        <!-- Contact Options -->
+        <section class="contact-options">
+            <h2>How Can We Help?</h2>
+            <div class="options-grid">
+                <div class="option-card">
+                    <div class="option-icon">📧</div>
+                    <h3>Email Us</h3>
+                    <p>For general inquiries: <a href="jawadabbasi1107@gmail.com"><strong>Email Hare</strong></a></p>
+                    <p>For seller support: <a href="mjabbasi05@gmail.com">mjabbasi05@gmail.com</a></p>
+                </div>
+                <div class="option-card">
+                    <div class="option-icon">📞</div>
+                    <h3>Call Us</h3>
+                    <p>Customer Service: <a href="tel:+18001234567">+1 (+92) 03435256963 </a></p>
+                    <p>Available Mon-Fri, 9AM–6PM (Local Time)</p>
+                </div>
+                <div class="option-card">
+                    <div class="option-icon">💬</div>
+                    <h3>Live Chat</h3>
+                    <p>Chat with our support agent in real time.</p>
+                    <a href="#" class="chat-button">Start Live Chat</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Form -->
+        <section class="contact-form-section">
+            <h2>Send Us a Message</h2>
+            <p>Fill out the form below and we’ll get back to you as soon as possible.</p>
+            <form class="contact-form">
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <select id="subject" name="subject" required>
+                        <option value="" disabled selected>Select a subject</option>
+                        <option value="order">Order Inquiry</option>
+                        <option value="return">Return or Refund</option>
+                        <option value="seller">Seller Registration</option>
+                        <option value="feedback">Feedback or Suggestion</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="message">Your Message</label>
+                    <textarea id="message" name="message" rows="6" placeholder="How can we help you?" required></textarea>
+                </div>
+                <button type="submit" class="submit-button">Send Message</button>
+            </form>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq-section">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <h3>How long does it take to receive a reply?</h3>
+                    <p>We aim to respond to all inquiries within 24 business hours.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Can I return an item purchased online?</h3>
+                    <p>Yes, most items can be returned within 30 days. Visit our Returns page for details.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>How do I become a verified seller?</h3>
+                    <p>Go to your Seller Dashboard or contact sellers@m-jstore.com for onboarding support.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Do you offer international shipping?</h3>
+                    <p>Yes, we ship to over 120 countries. Shipping rates and times vary by location.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Office Locations -->
+        <section class="location-section">
+            <h2>Our Offices</h2>
+            <div class="locations-grid">
+                <div class="location-card">
+                    <h3>New York, USA</h3>
+                    <p>123 Commerce St, Suite 500<br>New York, NY 10001</p>
+                </div>
+                <div class="location-card">
+                    <h3>Dubai, UAE</h3>
+                    <p>Trade Tower, Sheikh Zayed Road<br>Downtown, Dubai</p>
+                </div>
+                <div class="location-card">
+                    <h3>Karachi, Pakistan</h3>
+                    <p>Unit 7, Tech Park, Block B<br>SITE Area, Karachi 75600</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2023 M-J Store. All rights reserved.</p>
+        <p>
+            <a href="{% url 'policies' %}">Privacy Policy</a> |
+            <a href="{% url 'terms' %}">Terms of Service</a> |
+            <a href="{% url 'help' %}">Help Center</a>
+        </p>
+    </footer>
 </body>
 </html>

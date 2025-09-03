@@ -1,121 +1,110 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>M_j Global Store</title>
+    <title>MJ Store - Premium Products</title>
+
+    <!-- Google Fonts (Inter + Playfair Display) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #3498db;
-            --background-light: #f4f7f9;
-            --card-background: #ffffff;
-            --text-dark: #333333;
-            --text-light: #666666;
-            --price-color: #27ae60;
-        }
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap"
+          rel="stylesheet">
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: var(--background-light);
-            color: var(--text-dark);
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        h1 {
-            color: var(--primary-color);
-            text-align: center;
-            margin: 40px 0;
-            font-weight: 700;
-            letter-spacing: 1px;
-        }
-
-        b {
-            color: var(--secondary-color);
-        }
-
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
-            padding: 20px;
-            max-width: 1200px;
-            width: 100%;
-        }
-
-        .product {
-            background: var(--card-background);
-            border: none;
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .product:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-        }
-
-        .product h2 {
-            margin: 0 0 10px 0;
-            font-size: 1.5em;
-            color: var(--text-dark);
-            font-weight: 600;
-        }
-
-        .product p {
-            margin: 0;
-            color: var(--text-light);
-            line-height: 1.6;
-        }
-
-        .price {
-            font-weight: 700;
-            color: var(--price-color);
-            font-size: 1.25em;
-            margin-top: 10px;
-        }
-
-        .stock {
-            font-size: 0.9em;
-            color: var(--text-light);
-            margin-top: 5px;
-        }
-
-        .product-details {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
-    </style>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/products.css' %}">
 </head>
 <body>
 
-    <h1>List of all available products on <b>M_j Global Store</b></h1>
+    <!-- Header with Navigation -->
+    <header>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>
+                <li><a href="{% url 'contact' %}">Contact</a></li>
+                <li><a href="{% url 'products' %}" class="active">Shop</a></li>
+                <li><a href="{% url 'help' %}">Help</a></li>
 
-    <div class="product-grid">
-        {% for product in products %}
-            <div class="product">
-                <div class="product-details">
-                    <h2>{{ product.name }}</h2>
-                    <p class="price">Rs {{ product.price }}</p>
-                    <p>{{ product.description }}</p>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'logout_view' %}">Logout</a></li>
+                {% else %}
+                    <li><a href="{% url 'login_view' %}">Login</a></li>
+                    <li><a href="{% url 'signup' %}">Signup</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Product Section -->
+    <main class="products-container">
+        <section class="hero-section">
+            <h1>Premium Collection</h1>
+            <p class="subtitle">Discover luxury products at <span class="brand-highlight">MJ Global Store</span></p>
+        </section>
+
+        <section class="product-grid">
+            {% for product in products %}
+            <article class="product-card">
+                <!-- Product Image -->
+                {% if product.image %}
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image">
+                {% else %}
+                <div class="product-image placeholder" aria-label="No image available"></div>
+                {% endif %}
+
+                <!-- Product Info -->
+                <div class="product-content">
+                    <h2 class="product-name">{{ product.name }}</h2>
+                    <p class="product-price">Rs {{ product.price | floatformat:2 }}</p>
+                    <p class="product-description">{{ product.description|truncatewords:20 }}</p>
+
+                    <div class="product-stock">
+                        {% if product.stock > 10 %}
+                            <span class="stock-indicator in-stock"></span>
+                            <span>In Stock ({{ product.stock }} available)</span>
+                        {% elif product.stock > 0 %}
+                            <span class="stock-indicator low-stock"></span>
+                            <span>Only {{ product.stock }} left!</span>
+                        {% else %}
+                            <span class="stock-indicator out-of-stock"></span>
+                            <span>Out of Stock</span>
+                        {% endif %}
+                    </div>
                 </div>
-                <p class="stock">Stock: {{ product.stock }}</p>
-            </div>
-        {% endfor %}
-    </div>
 
+                <!-- Action Buttons -->
+                <div class="product-actions">
+                    {% if product.stock > 0 %}
+                        <button class="btn btn-primary" aria-label="Add {{ product.name }} to cart">
+                            Add to Cart
+                        </button>
+                        <button class="btn btn-secondary" aria-label="Buy {{ product.name }} now">
+                            Buy Now
+                        </button>
+                    {% else %}
+                        <button class="btn btn-disabled" disabled>Out of Stock</button>
+                    {% endif %}
+                </div>
+            </article>
+            {% empty %}
+            <div class="no-products">
+                <p>No products available at the moment. Please check back later.</p>
+            </div>
+            {% endfor %}
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2023 M-J Store. All rights reserved.</p>
+        <p>
+            <a href="{% url 'policies' %}">Privacy Policy</a> |
+            <a href="{% url 'terms' %}">Terms of Service</a> |
+            <a href="{% url 'help' %}">Help Center</a>
+        </p>
+    </footer>
 </body>
 </html>

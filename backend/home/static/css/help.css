@@ -1,0 +1,352 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.7;
+    color: #333;
+    background-color: #f9f9f9;
+}
+
+/* Header & Navigation */
+header {
+    background-color: #0f1a2c;
+    padding: 1rem 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    padding: 0.5rem;
+}
+
+.nav-links a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1rem;
+    transition: color 0.3s;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+}
+
+.nav-links a:hover {
+    color: #ffd700; /* Gold hover (Amazon style) */
+}
+
+.nav-links a.active {
+    background-color: #ff9900;
+    color: white;
+    font-weight: 600;
+}
+
+/* Main Container */
+.help-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+}
+
+/* Hero Section */
+.hero-section {
+    text-align: center;
+    padding: 3rem 1rem;
+    background: linear-gradient(135deg, #0f1a2c 0%, #1a237e 100%);
+    color: white;
+    border-radius: 12px;
+    margin-bottom: 2.5rem;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.hero-section h1 {
+    font-size: 2.8rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.hero-text {
+    max-width: 700px;
+    margin: 0 auto 1.5rem;
+    font-size: 1.1rem;
+    opacity: 0.95;
+}
+
+/* Search Bar */
+.search-bar {
+    display: flex;
+    max-width: 600px;
+    margin: 0 auto;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.search-bar input {
+    flex: 1;
+    padding: 14px 18px;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+}
+
+.search-bar button {
+    background-color: #ff9900;
+    color: white;
+    border: none;
+    padding: 0 24px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.search-bar button:hover {
+    background-color: #e08800;
+}
+
+/* Category Section */
+.category-section h2 {
+    font-size: 2.2rem;
+    color: #0f1a2c;
+    margin-bottom: 1.8rem;
+    text-align: center;
+    font-weight: 600;
+}
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.8rem;
+    margin-top: 1.5rem;
+}
+
+.category-card {
+    display: block;
+    background-color: white;
+    padding: 1.8rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.category-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+}
+
+.category-icon {
+    font-size: 3rem;
+    margin-bottom: 0.8rem;
+}
+
+.category-card h3 {
+    color: #0f1a2c;
+    margin-bottom: 0.6rem;
+    font-size: 1.3rem;
+}
+
+.category-card p {
+    color: #555;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Help Content (FAQs) */
+.help-content {
+    margin-bottom: 3rem;
+}
+
+.help-content h2 {
+    font-size: 2.0rem;
+    color: #0f1a2c;
+    margin: 2.5rem 0 1.5rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 2px solid #eee;
+    color: #1a237e;
+}
+
+.faq-list {
+    margin-top: 1rem;
+}
+
+.faq-item {
+    background-color: white;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    transition: box-shadow 0.3s;
+}
+
+.faq-item:hover {
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+}
+
+.faq-item h3 {
+    margin: 0;
+    padding: 1rem 1.4rem;
+    background-color: #f5f9ff;
+    color: #1a237e;
+    font-size: 1.15rem;
+    cursor: pointer;
+    font-weight: 500;
+    border-left: 4px solid #1a237e;
+}
+
+.faq-item p {
+    padding: 1.2rem 1.5rem;
+    margin: 0;
+    color: #555;
+    line-height: 1.7;
+    background-color: #fff;
+}
+
+/* Final CTA Section */
+.final-cta {
+    text-align: center;
+    padding: 2.5rem 1.5rem;
+    background-color: #f0f8ff;
+    border-radius: 12px;
+    border: 1px solid #e0e0e0;
+}
+
+.final-cta h2 {
+    font-size: 2.2rem;
+    color: #0f1a2c;
+    margin-bottom: 0.8rem;
+}
+
+.final-cta p {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 1.5rem;
+}
+
+.cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 14px 30px;
+    background-color: #ff9900;
+    color: white;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 500;
+    border-radius: 6px;
+    transition: background-color 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.cta-button:hover {
+    background-color: #e08800;
+    transform: translateY(-2px);
+}
+
+.chat-link {
+    display: inline-block;
+    padding: 14px 30px;
+    background-color: #0066c0;
+    color: white;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 500;
+    border-radius: 6px;
+    transition: background-color 0.3s;
+}
+
+.chat-link:hover {
+    background-color: #00468b;
+    transform: translateY(-2px);
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 2rem 1rem;
+    background-color: #0f1a2c;
+    color: #bbb;
+    font-size: 0.95rem;
+    margin-top: 3rem;
+}
+
+footer p {
+    margin-bottom: 0.5rem;
+}
+
+footer a {
+    color: #ddd;
+    text-decoration: none;
+    margin: 0 0.7rem;
+}
+
+footer a:hover {
+    color: #ffd700;
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-section h1 {
+        font-size: 2.2rem;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .category-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .help-container {
+        padding: 0 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-text,
+    .faq-item p {
+        font-size: 1rem;
+    }
+
+    .help-content h2 {
+        font-size: 1.8rem;
+    }
+
+    .search-bar {
+        flex-direction: column;
+    }
+
+    .search-bar input,
+    .search-bar button {
+        width: 100%;
+        margin: 0;
+    }
+
+    .search-bar button {
+        padding: 12px;
+    }
+}
