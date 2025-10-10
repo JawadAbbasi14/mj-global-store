@@ -5,3 +5,8 @@ from .models import Products
 def product_list(request):
     products = Products.objects.all()
     return render(request, 'product/product_list.html', {'products': products})
+
+# For mj collection page!
+
+# def mjcollections(request):
+#     return render(request,'product/mjcollections.html')
