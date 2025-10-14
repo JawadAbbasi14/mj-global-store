@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+  {%load static%}
+  <!-- <link rel="stylesheet" href="{% static 'cart/css/detial.css'%}"> -->
+  <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cart | Detail</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e8eef3 100%);
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.cart-div {
+  max-width: 1000px;
+  margin: 0 auto 30px;
+  background: white;
+  padding: 25px 30px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.cart-div h3 {
+  color: #2c3e50;
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.cart-div li {
+  list-style: none;
+  color: #7f8c8d;
+  font-size: 14px;
+}
+
+.cart-items-div {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  gap: 20px;
+}
+
+.product-subdiv {
+  background: white;
+  padding: 20px 25px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  border-left: 4px solid #3498db;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-subdiv:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+}
+
+.product-subdiv p {
+  margin-bottom: 10px;
+  font-size: 15px;
+  color: #555;
+  line-height: 1.6;
+}
+
+.product-subdiv p:first-child {
+  font-size: 18px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 12px;
+}
+
+/* Empty Cart Styling */
+.empty-cart {
+  max-width: 500px;
+  margin: 80px auto;
+  text-align: center;
+  background: white;
+  padding: 60px 40px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.empty-cart-icon {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 30px;
+  animation: float 3s ease-in-out infinite;
+}
+
+.empty-cart-icon svg {
+  width: 100%;
+  height: 100%;
+  opacity: 0.3;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.empty-cart p {
+  font-size: 20px;
+  color: #7f8c8d;
+  margin-bottom: 25px;
+}
+
+.empty-cart a {
+  display: inline-block;
+  background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+  color: white;
+  text-decoration: none;
+  padding: 14px 32px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 16px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+}
+
+.empty-cart a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  body {
+    padding: 15px;
+  }
+  
+  .cart-div {
+    padding: 20px;
+  }
+  
+  .cart-div h3 {
+    font-size: 22px;
+  }
+  
+  .product-subdiv {
+    padding: 15px 20px;
+  }
+  
+  .empty-cart {
+    padding: 40px 25px;
+    margin: 40px auto;
+  }
+  
+  .empty-cart-icon {
+    width: 100px;
+    height: 100px;
+  }
+}
+</style>
+</head>
+<body>
+<div class="cart-div">
+<h3><b>Your Cart Items: {{cart.total_items}}</b></h3>
+<li>Products {{ cartitems.product_name }}</li>
+</div>
+
+<div class="cart-items-div">
+ {% for item in cart.items.all %}
+<div class="product-subdiv">
+<p>{{ item.product_name }}</p>
+<p><strong>Quantity:</strong> {{ item.quantity }}</p>
+<p><strong>Price:</strong> ${{ item.unit_price }}</p>
+<p><strong>Added:</strong> {{ item.added_at }}</p>
+</div>
+ {% endfor %}
+</div>
+
+<!-- Empty State -->
+{% if not cart.items.all %}
+<div class="empty-cart">
+  <div class="empty-cart-icon">
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M9 2L7.17 4H4C2.9 4 2 4.9 2 6V19C2 20.1 2.9 21 4 21H20C21.1 21 22 20.1 22 19V6C22 4.9 21.1 4 20 4H16.83L15 2H9ZM7 8C7 10.76 9.24 13 12 13C14.76 13 17 10.76 17 8H19C19 11.87 15.87 15 12 15C8.13 15 5 11.87 5 8H7Z" fill="currentColor"/>
+    </svg>
+  </div>
+  <p>Your cart is empty!</p>
+  <a href="{% url 'products' %}">Start Shopping</a>
+</div>
+{% endif %}
+
+</body>
+</html>
