@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MJ Store - Premium Products</title>
 
-    <!-- Google Fonts (Inter + Playfair Display) -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap"
@@ -50,16 +50,16 @@
             <article class="product-card">
                 <!-- Product Image -->
                 {% if product.image %}
-                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image">
                 {% else %}
-                <div class="product-image placeholder" aria-label="No image available"></div>
+                    <div class="product-image placeholder" aria-label="No image available"></div>
                 {% endif %}
-
 
                 <!-- Product Info -->
                 <div class="product-content">
                     <h2 class="product-name">{{ product.name }}</h2>
-                    <p class="product-price">Rs ${{ product.price | floatformat:2 }}</p>
+                    <!-- ✅ Fixed: Only "Rs" (not "$") -->
+                    <p class="product-price">${{ product.price|floatformat:2 }}</p>
                     <p class="product-description">{{ product.description|truncatewords:20 }}</p>
 
                     <div class="product-stock">
@@ -79,12 +79,13 @@
                 <!-- Action Buttons -->
                 <div class="product-actions">
                     {% if product.stock > 0 %}
-                        <button class="btn btn-primary" aria-label="Add {{ product.name }} to cart">
-                            Add to Cart
-                        </button>
-                        <button class="btn btn-secondary" aria-label="Buy {{ product.name }} now">
-                            Buy Now
-                        </button>
+                        <!-- ✅ Correct URL name: 'cart:add_to_cart' -->
+                        <form action="{% url 'cart:add_to_cart' product.id %}" method="POST" style="display:inline;">
+                            {% csrf_token %}
+                            <input type="hidden" name="qty" value="1">
+                            <button type="submit" class="btn btn-primary">Add to Cart</button>
+                        </form>
+                        <!-- Optional: Remove per-product "Cart" button to avoid clutter -->
                     {% else %}
                         <button class="btn btn-disabled" disabled>Out of Stock</button>
                     {% endif %}
@@ -92,15 +93,22 @@
             </article>
             {% empty %}
             <div class="no-products">
-                <p>No products available at the moment. Please check back later.</p>
+                <p>No products available at the moment.</p>
             </div>
             {% endfor %}
         </section>
+
+        <!-- ✅ Single "View Cart" button at bottom (optional but cleaner) -->
+        {% if user.is_authenticated and products %}
+        <div style="text-align: center; margin-top: 40px;">
+            <a href="{% url 'cart:detail' %}" class="btn btn-secondary">View Cart</a>
+        </div>
+        {% endif %}
     </main>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2023 M-J Store. All rights reserved.</p>
+        <p>&copy; 2025 M-J Store. All rights reserved.</p>
         <p>
             <a href="{% url 'policies' %}">Privacy Policy</a> |
             <a href="{% url 'terms' %}">Terms of Service</a> |

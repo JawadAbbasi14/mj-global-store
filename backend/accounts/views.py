@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
+User =get_user_model # object of get_user_model
 from django.contrib import messages
 from django.contrib.auth import authenticate, login,logout
 import re
 import logging
 from django.http import HttpResponse
+
 
 def dashboard(request):
     return render(request, 'accounts/dashboard.html')

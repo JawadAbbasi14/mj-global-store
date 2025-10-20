@@ -1,6 +1,9 @@
 # cart/models.py
 from django.conf import settings
 from django.db import models
+from django.db import models
+from django.contrib.auth import get_user_model
+
 
 # Replace with your real product model import if different:
 from product.models import Products
@@ -9,6 +12,7 @@ class Cart(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.CASCADE)
     session_key = models.CharField(max_length=40, null=True, blank=True, db_index=True)
     ordered = models.BooleanField(default=False)   # agar order flow use karoge
+    is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -102,3 +106,22 @@ class CartItem(models.Model):
     @property
     def total_price(self):
         return self.unit_price * self.quantity
+
+
+User = get_user_model()  # Best practice for user model
+
+class CartAuthority(models.Model):
+    class Status(models.TextChoices):
+        PENDING = 'pending', 'Pending'
+        CONFIRMED = 'confirmed', 'Confirmed'
+        CANCELLED = 'cancelled', 'Cancelled'
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    cart = models.ForeignKey('Cart', on_delete=models.CASCADE)  # Agar Cart model same file mein nahi, toh quotes mein likho
+    status = models.CharField(max_length=20, choices=Status.choices, default=Status.PENDING)
+    total = models.DecimalField(max_digits=10, decimal_places=2)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"CartAuthority for {self.user.username} - {self.status}"

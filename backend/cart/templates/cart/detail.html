@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cart | Detail</title>
+
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'cart/css/detail.css' %}">
+</head>
+
+<style>
+
+/* --- Global Resets & Base Styles --- */
+body {
+    /* Use system-default fonts for fast loading */
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: #f0f2f5; /* Light grey background for modern feel */
+    color: #333;
+    line-height: 1.6;
+    margin: 0;
+    padding: 30px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* --- Main Container Layout --- */
+.cart-header,
+.empty-state,
+.cart-items-container,
+.checkout-section,
+.cart-summary-section {
+    width: 100%;
+    max-width: 900px;
+    margin: 10px auto;
+}
+
+
+
+/* --- Typography and Header Styles --- */
+.cart-header {
+    text-align: center;
+    padding: 20px 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.cart-header h3 {
+    font-size: 2.2rem;
+    color: #1a73e8; /* Professional Blue */
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+
+.subtitle {
+    color: #5f6368;
+    font-size: 1rem;
+    margin-bottom: 20px;
+}
+
+/* --- Cart Item Card Styling (Flex Layout) --- */
+.cart-item {
+    display: flex; 
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Soft, clean shadow */
+}
+
+/* 1. Image */
+.item-image img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-right: 20px;
+    border: 1px solid #e0e0e0;
+}
+
+/* 2. Info */
+.item-info {
+    flex-grow: 1; /* Takes up available space */
+    min-width: 150px;
+}
+
+.item-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.item-subtitle {
+    font-size: 0.8rem;
+    color: #888;
+}
+
+/* 3. Item Details Display (Price, Qty, Total) */
+.item-details-display {
+    text-align: right;
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-right: 30px;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.95rem;
+}
+
+.detail-row strong {
+    min-width: 50px;
+    text-align: right;
+}
+
+.item-subtotal {
+    border-top: 1px dashed #e0e0e0;
+    padding-top: 5px;
+    margin-top: 5px;
+    font-weight: 600;
+}
+
+.item-subtotal strong {
+    color: #1a73e8; /* Highlighted total price */
+}
+
+
+/* --- Summary Section (Floated right) --- */
+.cart-summary-section {
+    background-color: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    margin-top: 30px;
+    max-width: 400px; 
+    margin-left: auto; /* Pushes summary to the right */
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px dashed #eee;
+}
+
+.summary-total {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 0 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #333;
+}
+
+
+/* --- Checkout and Footer Actions --- */
+.checkout-section {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.checkout-message {
+    color: #5f6368;
+    margin-bottom: 15px;
+}
+
+.continue-shopping {
+    display: block;
+    margin-top: 20px;
+    color: #1a73e8;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.15s;
+}
+
+.continue-shopping:hover {
+    color: #0d47a1;
+}
+
+/* --- Buttons (Reusable) --- */
+.btn-checkout,
+.delete-button,
+a.btn-primary {
+    display: inline-block;
+    padding: 12px 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+    text-decoration: none;
+    text-align: center;
+}
+
+a.btn-primary {
+    background-color: #1a73e8;
+    color: white;
+    box-shadow: 0 4px 6px rgba(26, 115, 232, 0.3);
+}
+a.btn-primary:hover {
+    background-color: #0d47a1;
+    box-shadow: 0 6px 10px rgba(26, 115, 232, 0.4);
+    transform: translateY(-2px);
+}
+
+.btn-checkout {
+    background-color: #00c853; /* Bright Green - Action color */
+    color: white;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 4px 6px rgba(0, 200, 83, 0.3);
+}
+.btn-checkout:hover {
+    background-color: #009624;
+    box-shadow: 0 6px 10px rgba(0, 200, 83, 0.4);
+    transform: translateY(-2px);
+}
+
+.delete-button {
+    background: none;
+    color: #dc3545; /* Red danger color */
+    padding: 8px 15px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border: 1px solid #dc3545;
+    border-radius: 6px;
+    line-height: 1;
+    transition: background-color 0.2s;
+    min-width: 100px; /* Gives the button a stable size */
+}
+
+.delete-button:hover {
+    background-color: #dc3545;
+    color: white;
+    box-shadow: none;
+}
+
+/* --- Empty State Styling --- */
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    border: 3px dashed #cfd8dc;
+    border-radius: 15px;
+    margin-top: 50px;
+    background-color: #ffffff;
+}
+
+.empty-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 20px;
+    color: #1a73e8;
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 650px) {
+    .cart-item {
+        flex-wrap: wrap; 
+        padding: 15px;
+    }
+
+    .item-image {
+        margin-right: 15px;
+    }
+
+    .item-info {
+        flex-basis: calc(100% - 110px); 
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+    
+    .item-details-display {
+        width: 100%;
+        margin: 10px 0;
+        border-top: 1px solid #eee;
+        padding-top: 10px;
+        font-size: 1rem;
+        margin-right: 0;
+    }
+
+    .delete-button {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .cart-summary-section {
+        max-width: 100%;
+    }
+}
+
+/* css for messages */
+
+.message.success {
+  background: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.message.error {
+  background: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+.message.warning {
+  background: #fff3cd;
+  color: #856404;
+  border: 1px solid #ffeeba;
+}
+
+
+/* --- Custom Modal Styles (For delete confirmation) --- */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.visible {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    transform: scale(0.95);
+    transition: transform 0.3s ease;
+}
+
+.modal-overlay.visible .modal-content {
+    transform: scale(1);
+}
+
+.modal-header {
+    color: #333;
+    font-weight: 600;
+    margin-top: 0;
+}
+
+#modal-message {
+    color: #5f6368;
+    margin-bottom: 25px;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: space-around;
+}
+
+.btn-cancel,
+.btn-confirm-delete {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-cancel {
+    background-color: #e0e0e0;
+    color: #333;
+}
+
+.btn-cancel:hover {
+    background-color: #ccc;
+}
+
+.btn-confirm-delete {
+    background-color: #dc3545;
+    color: white;
+}
+
+.btn-confirm-delete:hover {
+    background-color: #c82333;
+}
+
+  
+</style>
+
+<body>
+
+  <div class="cart-header">
+    <h3>Your Shopping Cart ({{ cart.total_items }} Items)</h3>
+    <div class="subtitle">Review your items and proceed to checkout</div>
+  </div>
+
+<body>
+
+  {% if messages %}
+  <div class="message-container">
+    {% for message in messages %}
+      <div class="message {{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+</body>
+
+
+
+  {% if not cart.items.exists %}
+  <div class="empty-state">
+    <div class="empty-icon">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M9 2L7.17 4H4C2.9 4 2 4.9 2 6V19C2 20.1 2.9 21 4 21H20C21.1 21 22 20.1 22 19V6C22 4.9 21.1 4 20 4H16.83L15 2H9ZM7 8C7 10.76 9.24 13 12 13C14.76 13 17 10.76 17 8H19C19 11.87 15.87 15 12 15C8.13 15 5 11.87 5 8H7Z"
+          fill="currentColor" />
+      </svg>
+    </div>
+    <p>Your cart is empty!</p>
+    <a href="{% url 'products' %}" class="btn-primary">Start Shopping</a>
+  </div>
+  {% else %}
+  
+  <div class="cart-items-container">
+    {% for item in cart.items.all %}
+    <div class="cart-item">
+
+      <!-- Product Image Placeholder -->
+<div class="item-image">
+  <img src="{{ item.product.image.url }}" alt="{{ item.product_name }} Image">
+</div>
+
+      <!-- Product Information -->
+      <div class="item-info">
+        <div class="item-title">{{ item.product_name }}</div>
+        <div class="item-subtitle">Added: {{ item.added_at|date:"M d, Y" }}</div>
+      </div>
+
+      <!-- Item Details (Quantity & Price) -->
+      <div class="item-details-display">
+        <div class="detail-row">
+          <span>Price:</span>
+          <strong>${{ item.unit_price|floatformat:2 }}</strong>
+        </div>
+        <div class="detail-row">
+          <span>Quantity:</span>
+          <strong>{{ item.quantity }}</strong>
+        </div>
+        <div class="detail-row item-subtotal">
+          <span>Line Total:</span>
+          <!-- Assuming CartItem model has a 'line_total' property, or calculating it -->
+          <strong>${{ item.line_total|default:item.unit_price|floatformat:2|add:item.quantity }}</strong> 
+        </div>
+      </div>
+      
+      <!-- Delete Button (Triggers custom modal) -->
+      <button class="delete-button" 
+              onclick="showDeleteModal('{{ item.product_name }}', 'form-delete-{{ item.product.id }}')">
+        Remove
+      </button>
+
+      <!-- Hidden Delete Form (Submits when confirmed in modal) -->
+      <form action="{% url 'cart:remove-item' item.product.id %}" method="post" 
+            class="hidden-delete-form" id="form-delete-{{ item.product.id }}">
+        {% csrf_token %}
+      </form>
+      
+    </div>
+    {% endfor %}
+  </div>
+
+  <!-- Cart Summary -->
+  <div class="cart-summary-section">
+    <div class="summary-row">
+      <span>Subtotal:</span>
+      <!-- Assuming cart.subtotal is available -->
+      <strong>${{ cart.subtotal|default:'0.00' }}</strong> 
+    </div>
+    <div class="summary-row">
+      <span>Shipping (Est.):</span>
+      <strong>$10.00</strong> 
+    </div>
+    <div class="summary-total">
+      <span>Order Total:</span>
+      <!-- Assuming cart.total_price is available -->
+      <strong>${{ cart.total_price|default:'0.00' }}</strong> 
+    </div>
+  </div>
+
+  <div class="checkout-section">
+    <p class="checkout-message">Press the checkout button to finalize your order.</p>
+    <form action="{% url 'cart:confirm_cart' %}" method="POST">
+      {% csrf_token %}
+      <button type="submit" class="btn-checkout">Proceed to Secure Checkout</button>
+    </form>
+    <a href="{% url 'products' %}" class="continue-shopping">← Continue Shopping</a>
+  </div>
+  {% endif %}
+
+  <!-- --- Custom Delete Confirmation Modal (Replaces prohibited confirm() function) --- -->
+  <div id="delete-modal" class="modal-overlay">
+    <div class="modal-content">
+      <h4 class="modal-header">Confirm Deletion</h4>
+      <p id="modal-message">Are you sure you want to remove this item?</p>
+      <div class="modal-actions">
+        <button class="btn-cancel" onclick="closeDeleteModal()">Cancel</button>
+        <button class="btn-confirm-delete" id="confirm-delete-btn">Remove Item</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Global variable to hold the form to be submitted
+    let formToSubmit = null;
+
+    // Custom Modal Logic (Replaces confirm())
+    function showDeleteModal(itemName, formId) {
+      formToSubmit = document.getElementById(formId);
+      document.getElementById('modal-message').innerHTML = 
+        `Are you sure you want to remove <strong>${itemName}</strong> from your cart?`;
+      document.getElementById('delete-modal').classList.add('visible');
+    }
+
+    function closeDeleteModal() {
+      document.getElementById('delete-modal').classList.remove('visible');
+      formToSubmit = null;
+    }
+
+    // Handle confirmation click
+    document.getElementById('confirm-delete-btn').addEventListener('click', () => {
+      if (formToSubmit) {
+        formToSubmit.submit();
+        closeDeleteModal();
+      }
+    });
+
+    // Close modal if user clicks outside
+    document.getElementById('delete-modal').addEventListener('click', (e) => {
+      if (e.target.id === 'delete-modal') {
+        closeDeleteModal();
+      }
+    });
+  </script>
+
+</body>
+
+</html>
