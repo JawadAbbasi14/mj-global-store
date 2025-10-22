@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order | Total</title>
+    <style>
+        /* Global Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Body Styling */
+        body {
+            background-color: #f0f0f0; /* mjstore light gray */
+            color: #333333; /* mjstore text color */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Total Amount Container */
+        .total_amount {
+            background-color: white; /* Clean white background */
+            border: 3px solid #5b67f3; /* mjstore blue border */
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        /* Hover Effect */
+        .total_amount:hover {
+            transform: translateY(-5px); /* Slight lift on hover */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Stronger shadow */
+        }
+
+        /* Heading Styling */
+        .total_amount h2 {
+            color: #5b67f3; /* mjstore blue */
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        /* Accent for Zero Bill */
+        .total_amount h2.zero {
+            color: #ff6b6b; /* mjstore warm red for zero bill */
+            font-style: italic;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .total_amount {
+                padding: 20px;
+            }
+            .total_amount h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="total_amount">
+        {% if order.total_bill is not None %}
+            <h2>Your Bill: PKR {{ order.total_bill }}</h2>
+        {% else %}
+            <h2 class="zero">Your Bill: PKR 0</h2>
+        {% endif %}
+    </div>
+</body>
+</html>
