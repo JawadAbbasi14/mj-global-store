@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- User ko payment method choose karne dena -->
+     <h1>The main page of Payment method</h1>
+
+
+<h2>Select Payment Method</h2>
+<form method="POST">
+  {% csrf_token %}
+  <button name="method" value="easypaisa">EasyPaisa</button>
+  <button name="method" value="jazzcash">JazzCash</button>
+  <button name="method" value="cod">Cash on Delivery</button>
+</form>
+
+
+</body>
+</html>

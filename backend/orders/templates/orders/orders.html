@@ -4,77 +4,275 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order | Total</title>
+    <title>Order Confirmation | MJ Global Store</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
-        /* Global Reset */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        /* Body Styling */
         body {
-            background-color: #f0f0f0; /* mjstore light gray */
-            color: #333333; /* mjstore text color */
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf9 100%);
+            color: #333;
+            padding: 20px;
             min-height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
             padding: 20px;
         }
 
-        /* Total Amount Container */
-        .total_amount {
-            background-color: white; /* Clean white background */
-            border: 3px solid #5b67f3; /* mjstore blue border */
-            border-radius: 15px;
-            padding: 30px;
-            text-align: center;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            max-width: 400px;
-            width: 100%;
-        }
-
-        /* Hover Effect */
-        .total_amount:hover {
-            transform: translateY(-5px); /* Slight lift on hover */
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Stronger shadow */
-        }
-
-        /* Heading Styling */
-        .total_amount h2 {
-            color: #5b67f3; /* mjstore blue */
-            font-size: 2rem;
+        .header h1 {
+            color: #5b67f3;
+            font-size: 2.2rem;
             margin-bottom: 10px;
         }
 
-        /* Accent for Zero Bill */
-        .total_amount h2.zero {
-            color: #ff6b6b; /* mjstore warm red for zero bill */
-            font-style: italic;
+        .header p {
+            color: #666;
+            font-size: 1.1rem;
         }
 
-        /* Responsive Design */
+        .order-summary {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(91, 103, 243, 0.15);
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            background: #5b67f3;
+            color: white;
+            padding: 16px 24px;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .order-details {
+            padding: 20px 24px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 12px 0;
+            font-size: 1.05rem;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: #555;
+        }
+
+        .detail-value {
+            color: #333;
+        }
+
+        .items-list {
+            padding: 0 24px 20px;
+        }
+
+        .item {
+            display: flex;
+            padding: 16px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .item:last-child {
+            border-bottom: none;
+        }
+
+        .item-info {
+            flex: 1;
+        }
+
+        .item-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 6px;
+            color: #222;
+        }
+
+        .item-meta {
+            font-size: 0.95rem;
+            color: #666;
+        }
+
+        .item-price {
+            font-weight: 700;
+            color: #5b67f3;
+            font-size: 1.15rem;
+            min-width: 100px;
+            text-align: right;
+        }
+
+        .total-section {
+            background: #f9fafc;
+            padding: 20px 24px;
+            text-align: right;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+            font-size: 1.1rem;
+        }
+
+        .total-label {
+            font-weight: 600;
+        }
+
+        .grand-total {
+            font-size: 1.4rem;
+            color: #5b67f3;
+            font-weight: 700;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px solid #eee;
+        }
+
+        .actions {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #5b67f3;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: 2px solid #5b67f3;
+        }
+
+        .btn:hover {
+            background: white;
+            color: #5b67f3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(91, 103, 243, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #5b67f3;
+            margin-left: 15px;
+        }
+
+        .btn-secondary:hover {
+            background: #f0f4ff;
+        }
+
         @media (max-width: 600px) {
-            .total_amount {
-                padding: 20px;
+            .item {
+                flex-direction: column;
             }
-            .total_amount h2 {
-                font-size: 1.5rem;
+            .item-price {
+                text-align: left;
+                margin-top: 8px;
+            }
+            .total-section {
+                text-align: left;
+            }
+            .btn {
+                display: block;
+                margin: 10px auto;
+                width: 80%;
+            }
+            .btn-secondary {
+                margin-left: 0;
             }
         }
     </style>
 </head>
 <body>
-    <div class="total_amount">
-        {% if order.total_bill is not None %}
-            <h2>Your Bill: PKR {{ order.total_bill }}</h2>
-        {% else %}
-            <h2 class="zero">Your Bill: PKR 0</h2>
-        {% endif %}
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-check-circle"></i> Order Confirmed!</h1>
+            <p>Thank you for your purchase. Your order details are below.</p>
+        </div>
+
+        <div class="order-summary">
+            <div class="section-title">
+                Order #{{ order.id }} • {{ order.created_at|date:"M d, Y" }}
+            </div>
+
+            <div class="order-details">
+                <div class="detail-row">
+                    <span class="detail-label">Customer:</span>
+                    <span class="detail-value">{{ order.user.get_full_name|default:order.user.username }}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Payment Method:</span>
+                    <span class="detail-value">{{ order.payment_method }}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Status:</span>
+                    <span class="detail-value">
+                        {% if order.payment_status %}
+                            <span style="color: green;">Paid</span>
+                        {% else %}
+                            <span style="color: #e67e22;">Pending (COD)</span>
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+
+            <div class="section-title">Order Items</div>
+            <div class="items-list">
+                {% for item in cart.items.all %}
+                <div class="item">
+                    <div class="item-info">
+                        <div class="item-name">{{ item.product_name }}</div>
+                        <div class="item-meta">
+                            Quantity: {{ item.quantity }} × ${{ item.unit_price }}
+                        </div>
+                    </div>
+                    <div class="item-price">$ {{ item.total_price }}</div>
+                </div>
+                {% empty %}
+                <div class="item">
+                    <div class="item-info">No items found.</div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="total-section">
+                <div class="total-row">
+                    <span class="total-label">Subtotal:</span>
+                    <span>$ {{ cart.total_price }}</span>
+                </div>
+                <div class="total-row">
+                    <span class="total-label">Shipping:</span>
+                    <span>$ 0.00</span>
+                </div>
+                <div class="total-row grand-total">
+                    <span>Total:</span>
+                    <span>$ {{ order.total_amount }}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="actions">
+            <a href="{% url 'products' %}" class="btn">Continue Shopping</a>
+            <a href="{% url 'cart:detail' %}" class="btn btn-secondary">View Cart</a>
+        </div>
     </div>
 </body>
 </html>

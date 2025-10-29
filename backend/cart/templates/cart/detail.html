@@ -408,8 +408,6 @@ a.btn-primary:hover {
     <div class="subtitle">Review your items and proceed to checkout</div>
   </div>
 
-<body>
-
   {% if messages %}
   <div class="message-container">
     {% for message in messages %}
@@ -417,10 +415,6 @@ a.btn-primary:hover {
     {% endfor %}
   </div>
   {% endif %}
-
-</body>
-
-
 
   {% if not cart.items.exists %}
   <div class="empty-state">
@@ -440,14 +434,14 @@ a.btn-primary:hover {
     {% for item in cart.items.all %}
     <div class="cart-item">
 
-      <!-- Product Image Placeholder -->
-<div class="item-image">
-  <img src="{{ item.product.image.url }}" alt="{{ item.product_name }} Image">
-</div>
+      <!-- Product Image -->
+      <div class="item-image">
+        <img src="{{ item.product.image.url }}" alt="{{ item.product.name }} Image">
+      </div>
 
       <!-- Product Information -->
       <div class="item-info">
-        <div class="item-title">{{ item.product_name }}</div>
+        <div class="item-title">{{ item.product.name }}</div>
         <div class="item-subtitle">Added: {{ item.added_at|date:"M d, Y" }}</div>
       </div>
 
@@ -463,18 +457,17 @@ a.btn-primary:hover {
         </div>
         <div class="detail-row item-subtotal">
           <span>Line Total:</span>
-          <!-- Assuming CartItem model has a 'line_total' property, or calculating it -->
-          <strong>${{ item.line_total|default:item.unit_price|floatformat:2|add:item.quantity }}</strong> 
+          <strong>${{ item.line_total|floatformat:2 }}</strong>
         </div>
       </div>
       
-      <!-- Delete Button (Triggers custom modal) -->
+      <!-- Delete Button -->
       <button class="delete-button" 
-              onclick="showDeleteModal('{{ item.product_name }}', 'form-delete-{{ item.product.id }}')">
+              onclick="showDeleteModal('{{ item.product.name }}', 'form-delete-{{ item.product.id }}')">
         Remove
       </button>
 
-      <!-- Hidden Delete Form (Submits when confirmed in modal) -->
+      <!-- Hidden Delete Form -->
       <form action="{% url 'cart:remove-item' item.product.id %}" method="post" 
             class="hidden-delete-form" id="form-delete-{{ item.product.id }}">
         {% csrf_token %}
@@ -488,31 +481,27 @@ a.btn-primary:hover {
   <div class="cart-summary-section">
     <div class="summary-row">
       <span>Subtotal:</span>
-      <!-- Assuming cart.subtotal is available -->
-      <strong>${{ cart.subtotal|default:'0.00' }}</strong> 
+      <strong>${{ cart.subtotal|floatformat:2 }}</strong>
     </div>
     <div class="summary-row">
       <span>Shipping (Est.):</span>
-      <strong>$10.00</strong> 
+      <strong>$10.00</strong>
     </div>
     <div class="summary-total">
       <span>Order Total:</span>
-      <!-- Assuming cart.total_price is available -->
-      <strong>${{ cart.total_price|default:'0.00' }}</strong> 
+      <strong>${{ cart.total_price|floatformat:2 }}</strong>
     </div>
   </div>
 
+  <!-- Checkout Section -->
   <div class="checkout-section">
     <p class="checkout-message">Press the checkout button to finalize your order.</p>
-    <form action="{% url 'cart:confirm_cart' %}" method="POST">
-      {% csrf_token %}
-      <button type="submit" class="btn-checkout">Proceed to Secure Checkout</button>
-    </form>
+    <a href="{% url 'create_order' %}" class="btn-checkout">Place Order (COD)</a>
     <a href="{% url 'products' %}" class="continue-shopping">← Continue Shopping</a>
   </div>
   {% endif %}
 
-  <!-- --- Custom Delete Confirmation Modal (Replaces prohibited confirm() function) --- -->
+  <!-- Delete Confirmation Modal -->
   <div id="delete-modal" class="modal-overlay">
     <div class="modal-content">
       <h4 class="modal-header">Confirm Deletion</h4>
@@ -523,6 +512,8 @@ a.btn-primary:hover {
       </div>
     </div>
   </div>
+
+</body>
 
   <script>
     // Global variable to hold the form to be submitted
