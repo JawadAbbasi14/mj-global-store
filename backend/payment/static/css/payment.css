@@ -1,4 +1,4 @@
-   /* :root {
+    :root {
             --primary: #4361ee;
             --primary-dark: #3a56d4;
             --secondary: #7209b7;
@@ -221,8 +221,8 @@
             .form-actions {
                 flex-direction: column;
             }
-        } */
+        }
 
         h2{
             color: blueviolet;
-        }
+        } 
