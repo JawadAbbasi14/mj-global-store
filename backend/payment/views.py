@@ -13,7 +13,7 @@ def payment_method(request):
         # Get user's active cart
         cart = Cart.objects.filter(user=request.user, is_active=True, ordered=False).first()
         if not cart or not cart.items.exists():
-            return redirect('cart_empty')
+            return redirect('detail')
 
         # Calculate total using CartItem.unit_price
         total_amount = sum(item.unit_price * item.quantity for item in cart.items.all())
