@@ -1,0 +1,32 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment Failed</title>
+    <link rel="stylesheet" href="{% static 'css/payment.css' %}">
+</head>
+<body>
+<div class="container">
+    <div class="status failed">
+        <div class="icon">⚠️</div>
+        <h1>Payment Failed</h1>
+        <p>Kuch galat hua hai — payment process complete nahi ho saka.</p>
+        
+        <div class="suggestions">
+            <ul>
+                <li>Check karo ke internet stable tha.</li>
+                <li>Payment gateway service temporarily down ho sakti hai.</li>
+                <li>Phir se try karne ke liye “Retry Payment” dabao.</li>
+            </ul>
+        </div>
+
+        <div class="actions">
+            <a href="{% url 'payment_method' %}" class="btn btn-primary">Retry Payment</a>
+            <a href="{% url 'home' %}" class="btn btn-secondary">Cancel</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -40,7 +40,7 @@ def payment_method(request):
 
 # Success page view
 def payment_success(request):
-    return render(request, 'payment/success.html')
+    return render(request, 'payment/payment_success.html')
 
 
 # Failure page view

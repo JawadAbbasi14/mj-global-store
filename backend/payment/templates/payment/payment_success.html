@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment Successful</title>
+    <link rel="stylesheet" href="{% static 'css/payment.css' %}">
+</head>
+<body>
+<div class="container">
+    <div class="status success">
+        <div class="icon">✅</div>
+        <h1>Payment Successful</h1>
+        <p>Shukriya {{ request.user.username }}! Tumhara order successfully place ho gaya hai.</p>
+        
+        <div class="details">
+            <p><strong>Payment Method:</strong> {{ order.payment_method|default:"COD" }}</p>
+            <p><strong>Total Amount:</strong> Rs. {{ order.total_amount|floatformat:0 }}</p>
+        </div>
+
+        <div class="actions">
+            <a href="{% url 'order_summary' %}" class="btn btn-primary">View My Order</a>
+            <a href="{% url 'home' %}" class="btn btn-secondary">Back to Home</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+
