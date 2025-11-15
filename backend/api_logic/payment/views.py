@@ -3,6 +3,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from orders.models import Order
 from cart.models import Cart
+
+
 @login_required
 def payment_method(request):
     if request.method == "POST":
@@ -10,15 +12,15 @@ def payment_method(request):
         if selected_method not in ['easypaisa', 'jazzcash', 'cod']:
             return redirect('payment_failed')
 
-        # Get user's active cart
+        # 🧩 Active cart check
         cart = Cart.objects.filter(user=request.user, is_active=True, ordered=False).first()
         if not cart or not cart.items.exists():
-            return redirect('detail')
+            return redirect('payment_failed')
 
-        # Calculate total using CartItem.unit_price
+        # 🧩 Total calculate
         total_amount = sum(item.unit_price * item.quantity for item in cart.items.all())
 
-        # Create order
+        # 🧩 Create order
         order = Order.objects.create(
             user=request.user,
             total_amount=total_amount,
@@ -26,17 +28,22 @@ def payment_method(request):
             payment_status=(selected_method == 'cod')
         )
 
-        # Optional: mark cart as ordered or delete items
+        # 🧩 Mark cart as ordered
         cart.ordered = True
         cart.save()
-        # OR: cart.items.all().delete()
 
+        # 🧩 Redirect accordingly
         if selected_method == 'cod':
             return redirect('payment_success')
         else:
             return redirect('payment_gateway')
 
-    return render(request, 'payment/payment_select.html')
+    # ⚙️ For GET (page render)
+    order = Order.objects.filter(user=request.user).order_by('-id').first()
+    if not order:
+        return redirect('create_order')
+
+    return render(request, 'payment/payment_select.html', {'order': order})
 
 # Success page view
 def payment_success(request):

@@ -282,9 +282,10 @@
                         <input type="radio" name="method" value="cod" id="cod" style="display: none;">
                     </label>
                 </div>
-                
+
                 <div class="form-actions">
-                    <a href='{% url "orders:payment" %}'>Cancel</a>
+                <a href="{% url 'payment' order.id %}">Cancel</a>
+
 
                     <button type="submit" class="btn btn-primary">Continue to Payment</button>
                 </div>

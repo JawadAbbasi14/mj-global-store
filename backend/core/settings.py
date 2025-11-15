@@ -81,7 +81,8 @@ INSTALLED_APPS = [
     'home',
     'cart',
     'orders',
-    'payment'
+     # api      
+    'api_logic.payment'
 
 ]
 
