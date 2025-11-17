@@ -1,32 +1,253 @@
-
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Payment Failed</title>
     <link rel="stylesheet" href="{% static 'css/payment.css' %}">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .payment-failed-container {
+            max-width: 520px;
+            width: 100%;
+        }
+
+        .payment-failed-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            border: 1px solid #eaeaea;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .payment-failed-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .payment-failed-header {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .payment-failed-icon {
+            font-size: 60px;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .payment-failed-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        .payment-failed-message {
+            font-size: 16px;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+
+        .payment-failed-body {
+            padding: 30px;
+        }
+
+        .payment-failed-suggestions {
+            background: #fff9f9;
+            border: 1px solid #ffebee;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .payment-failed-suggestions-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #d32f2f;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .payment-failed-suggestions-title:before {
+            content: "💡";
+            margin-right: 8px;
+            font-size: 20px;
+        }
+
+        .payment-failed-suggestions-list {
+            list-style-type: none;
+        }
+
+        .payment-failed-suggestions-item {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .payment-failed-suggestions-item:before {
+            content: "•";
+            color: #f44336;
+            font-weight: bold;
+            position: absolute;
+            left: 10px;
+        }
+
+        .payment-failed-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .payment-failed-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            min-width: 160px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .payment-failed-btn-primary {
+            background: linear-gradient(to right, #2196F3, #1976D2);
+            color: white;
+        }
+
+        .payment-failed-btn-primary:hover {
+            background: linear-gradient(to right, #1976D2, #1565C0);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(33, 150, 243, 0.3);
+        }
+
+        .payment-failed-btn-secondary {
+            background: #f5f5f5;
+            color: #555;
+            border: 1px solid #ddd;
+        }
+
+        .payment-failed-btn-secondary:hover {
+            background: #e0e0e0;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .payment-failed-btn:active {
+            transform: translateY(0);
+        }
+
+        .payment-failed-btn-icon {
+            margin-right: 8px;
+            font-size: 18px;
+        }
+
+        /* Animation for the error icon */
+        @keyframes shake {
+            0%, 100% {transform: translateX(0);}
+            10%, 30%, 50%, 70%, 90% {transform: translateX(-5px);}
+            20%, 40%, 60%, 80% {transform: translateX(5px);}
+        }
+
+        .payment-failed-icon {
+            animation: shake 0.8s ease-in-out;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 576px) {
+            .payment-failed-header {
+                padding: 25px 20px;
+            }
+            
+            .payment-failed-body {
+                padding: 25px 20px;
+            }
+            
+            .payment-failed-title {
+                font-size: 24px;
+            }
+            
+            .payment-failed-actions {
+                flex-direction: column;
+            }
+            
+            .payment-failed-btn {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 <body>
-<div class="container">
-    <div class="status failed">
-        <div class="icon">⚠️</div>
-        <h1>Payment Failed</h1>
-        <p>Kuch galat hua hai — payment process complete nahi ho saka.</p>
-        
-        <div class="suggestions">
-            <ul>
-                <li>Check karo ke internet stable tha.</li>
-                <li>Payment gateway service temporarily down ho sakti hai.</li>
-                <li>Phir se try karne ke liye “Retry Payment” dabao.</li>
-            </ul>
-        </div>
+    <div class="payment-failed-container" id="paymentFailedContainer">
+        <div class="payment-failed-card" id="paymentFailedCard">
+            <div class="payment-failed-header" id="paymentFailedHeader">
+                <div class="payment-failed-icon" id="paymentFailedIcon">⚠️</div>
+                <h1 class="payment-failed-title" id="paymentFailedTitle">Payment Failed</h1>
+                <p class="payment-failed-message" id="paymentFailedMessage">
+                    Kuch galat hua hai — payment process complete nahi ho saka.
+                </p>
+            </div>
+            
+            <div class="payment-failed-body" id="paymentFailedBody">
+                <div class="payment-failed-suggestions" id="paymentFailedSuggestions">
+                    <h3 class="payment-failed-suggestions-title" id="paymentFailedSuggestionsTitle">
+                        Possible Solutions
+                    </h3>
+                    <ul class="payment-failed-suggestions-list" id="paymentFailedSuggestionsList">
+                        <li class="payment-failed-suggestions-item" id="paymentFailedSuggestionsItem1">
+                            Check karo ke internet stable tha.
+                        </li>
+                        <li class="payment-failed-suggestions-item" id="paymentFailedSuggestionsItem2">
+                            Payment gateway service temporarily down ho sakti hai.
+                        </li>
+                        <li class="payment-failed-suggestions-item" id="paymentFailedSuggestionsItem3">
+                            Phir se try karne ke liye "Retry Payment" dabao.
+                        </li>
+                    </ul>
+                </div>
 
-        <div class="actions">
-            <a href="{% url 'payment_method' %}" class="btn btn-primary">Retry Payment</a>
-            <a href="{% url 'products' %}" class="btn btn-secondary">Cancel</a>
+                <div class="payment-failed-actions" id="paymentFailedActions">
+                    <a href="{% url 'payment_method' %}" class="payment-failed-btn payment-failed-btn-primary" id="paymentFailedRetryBtn">
+                        <span class="payment-failed-btn-icon" id="paymentFailedRetryIcon">🔄</span>
+                        Retry Payment
+                    </a>
+                    <a href="{% url 'products' %}" class="payment-failed-btn payment-failed-btn-secondary" id="paymentFailedCancelBtn">
+                        <span class="payment-failed-btn-icon" id="paymentFailedCancelIcon">✖️</span>
+                        Cancel
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
-</div>
 </body>
 </html>
