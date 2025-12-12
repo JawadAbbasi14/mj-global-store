@@ -1,310 +1,280 @@
 {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 
+<style>
+.payment-gateway-container {
+max-width: 520px;
+margin: 40px auto;
+padding: 0 20px;
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+.payment-gateway-card {
+background: white;
+border-radius: 16px;
+box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+overflow: hidden;
+border: 1px solid #eaeaea;
+transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+.payment-gateway-card:hover {
+transform: translateY(-5px);
+box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+    }
+.payment-gateway-header {
+background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+color: white;
+padding: 25px 30px;
+text-align: center;
+position: relative;
+    }
+.payment-gateway-title {
+margin: 0;
+font-size: 24px;
+font-weight: 600;
+letter-spacing: 0.5px;
+    }
+.payment-gateway-icon {
+margin-top: 15px;
+    }
+.payment-method-icon {
+height: 40px;
+width: auto;
+filter: brightness(0) invert(1);
+    }
+.payment-gateway-body {
+padding: 30px;
+    }
+.payment-gateway-description {
+text-align: center;
+color: #555;
+margin-bottom: 25px;
+line-height: 1.6;
+font-size: 16px;
+    }
+.payment-method-name {
+color: #2575fc;
+    }
+.payment-divider {
+height: 1px;
+background: linear-gradient(to right, transparent, #ddd, transparent);
+margin: 25px 0;
+    }
+.payment-amount-container {
+text-align: center;
+margin-bottom: 30px;
+padding: 20px;
+background: #f9f9f9;
+border-radius: 12px;
+border: 1px solid #f0f0f0;
+    }
+.payment-amount-label {
+margin: 0 0 8px 0;
+font-size: 16px;
+color: #666;
+    }
+.payment-amount-value {
+margin: 0;
+font-size: 32px;
+font-weight: 700;
+color: #2c3e50;
+    }
+.payment-action-container {
+text-align: center;
+margin-top: 20px;
+    }
+.payment-redirect-message {
+margin-bottom: 20px;
+color: #666;
+font-size: 15px;
+    }
+.payment-start-btn {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+padding: 14px 28px;
+border: none;
+border-radius: 10px;
+font-size: 16px;
+font-weight: 600;
+cursor: pointer;
+transition: all 0.3s ease;
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+width: 100%;
+max-width: 280px;
+    }
+.easypaisa-btn {
+background: linear-gradient(to right, #2196F3, #1976D2);
+color: white;
+    }
+.jazzcash-btn {
+background: linear-gradient(to right, #E91E63, #C2185B);
+color: white;
+    }
+.payment-start-btn:hover {
+transform: translateY(-2px);
+box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    }
+.payment-start-btn:active {
+transform: translateY(0);
+    }
+.payment-start-btn:disabled {
+opacity: 0.7;
+cursor: not-allowed;
+transform: none;
+    }
+.btn-icon {
+margin-right: 10px;
+display: flex;
+align-items: center;
+    }
+.payment-error-message {
+color: #e74c3c;
+font-weight: 600;
+text-align: center;
+padding: 15px;
+background: #ffeaea;
+border-radius: 8px;
+border: 1px solid #ffcdd2;
+    }
+.payment-loader-container {
+display: none;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+padding: 30px 20px;
+text-align: center;
+    }
+.payment-loader-spinner {
+width: 50px;
+height: 50px;
+border: 5px solid #f3f3f3;
+border-top: 5px solid #3498db;
+border-radius: 50%;
+animation: spin 1s linear infinite;
+margin-bottom: 20px;
+    }
+.payment-loader-text {
+color: #666;
+font-size: 16px;
+margin: 0;
+    }
+@keyframes spin {
+        0% {
+transform: rotate(0deg);
+        }
+        100% {
+transform: rotate(360deg);
+        }
+    }
+/* Responsive adjustments */
+@media (max-width: 576px) {
+.payment-gateway-container {
+margin: 20px auto;
+padding: 0 15px;
+        }
+.payment-gateway-body {
+padding: 20px;
+        }
+.payment-amount-value {
+font-size: 28px;
+        }
+.payment-start-btn {
+padding: 12px 20px;
+font-size: 15px;
+        }
+    }
+</style>
 {% block content %}
 <div class="payment-gateway-container" id="paymentGatewayContainer">
-    <div class="payment-gateway-card" id="paymentGatewayCard">
-        <div class="payment-gateway-header" id="paymentGatewayHeader">
-            <h2 class="payment-gateway-title" id="paymentGatewayTitle">Payment Gateway</h2>
-            <div class="payment-gateway-icon" id="paymentGatewayIcon">
+<div class="payment-gateway-card" id="paymentGatewayCard">
+<div class="payment-gateway-header" id="paymentGatewayHeader">
+<h2 class="payment-gateway-title" id="paymentGatewayTitle">Payment Gateway</h2>
+<div class="payment-gateway-icon" id="paymentGatewayIcon">
                 {% if order.payment_method == 'easypaisa' %}
-                <img src="{% static 'images/easypaisa-icon.svg' %}" alt="Easypaisa" class="payment-method-icon"
-                    id="paymentMethodIcon">
+<img src="{% static 'images/easypaisa-icon.svg' %}" alt="Easypaisa" class="payment-method-icon"
+id="paymentMethodIcon">
                 {% elif order.payment_method == 'jazzcash' %}
-                <img src="{% static 'images/jazzcash-icon.svg' %}" alt="JazzCash" class="payment-method-icon"
-                    id="paymentMethodIcon">
+<img src="{% static 'images/jazzcash-icon.svg' %}" alt="JazzCash" class="payment-method-icon"
+id="paymentMethodIcon">
                 {% endif %}
-            </div>
-        </div>
-
-        <div class="payment-gateway-body" id="paymentGatewayBody">
-            <p class="payment-gateway-description" id="paymentGatewayDescription">
-                Your payment process is about to begin.
-                <br>Payment Method: <strong class="payment-method-name" id="paymentMethodName">{{
-                    order.payment_method|upper }}</strong>
-            </p>
-
-            <div class="payment-divider" id="paymentDivider"></div>
-
-            <!-- Amount Display -->
-            <div class="payment-amount-container" id="paymentAmountContainer">
-                <p class="payment-amount-label" id="paymentAmountLabel">Total Amount</p>
-                <p class="payment-amount-value" id="paymentAmountValue">Rs {{ order.total_amount }}</p>
-            </div>
-
-            <!-- Action Box -->
-            <div class="payment-action-container" id="paymentActionContainer">
-                {% if order.payment_method == 'easypaisa' %}
-                <p class="payment-redirect-message" id="paymentRedirectMessage">You will be redirected to Easypaisa</p>
-                <button id="paymentStartBtn" class="payment-start-btn easypaisa-btn">
-                    <span class="btn-icon" id="btnIcon">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M12 2L13.09 8.26L20 9L14.55 13.47L16.18 20L12 16.77L7.82 20L9.46 13.47L4 9L10.91 8.26L12 2Z"
-                                fill="currentColor" />
-                        </svg>
-                    </span>
-                    Start Easypaisa Payment
-                </button>
-                {% elif order.payment_method == 'jazzcash' %}
-                <p class="payment-redirect-message" id="paymentRedirectMessage">You will be redirected to JazzCash</p>
-                <button id="paymentStartBtn" class="payment-start-btn jazzcash-btn">
-                    <span class="btn-icon" id="btnIcon">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M12 2L13.09 8.26L20 9L14.55 13.47L16.18 20L12 16.77L7.82 20L9.46 13.47L4 9L10.91 8.26L12 2Z"
-                                fill="currentColor" />
-                        </svg>
-                    </span>
-                    Start JazzCash Payment
-                </button>
-                {% else %}
-                <p class="payment-error-message" id="paymentErrorMessage">Invalid Payment Method</p>
-            </form>
-            </div>
-
-            <!-- Loading Indicator -->
-            <div id="paymentLoader" class="payment-loader-container">
-                <div class="payment-loader-spinner" id="paymentLoaderSpinner"></div>
-                <p class="payment-loader-text" id="paymentLoaderText">Processing your payment...</p>
-            </div>
-        </div>
-    </div>
 </div>
-
+</div>
+<div class="payment-gateway-body" id="paymentGatewayBody">
+<p class="payment-gateway-description" id="paymentGatewayDescription">
+                Your payment process is about to begin.
+<br>Payment Method: <strong class="payment-method-name" id="paymentMethodName">{{
+                    order.payment_method|upper }}</strong>
+</p>
+<div class="payment-divider" id="paymentDivider"></div>
+<!-- Amount Display -->
+<div class="payment-amount-container" id="paymentAmountContainer">
+<p class="payment-amount-label" id="paymentAmountLabel">Total Amount</p>
+<p class="payment-amount-value" id="paymentAmountValue">Rs {{ order.total_amount }}</p>
+</div>
+<!-- Action Box -->
+<div class="payment-action-container" id="paymentActionContainer">
+                {% if order.payment_method == 'easypaisa' %}
+<p class="payment-redirect-message" id="paymentRedirectMessage">You will be redirected to Easypaisa</p>
+<button id="paymentStartBtn" class="payment-start-btn easypaisa-btn">
+<span class="btn-icon" id="btnIcon">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path
+d="M12 2L13.09 8.26L20 9L14.55 13.47L16.18 20L12 16.77L7.82 20L9.46 13.47L4 9L10.91 8.26L12 2Z"
+fill="currentColor" />
+</svg>
+</span>
+                    Start Easypaisa Payment
+</button>
+                {% elif order.payment_method == 'jazzcash' %}
+<p class="payment-redirect-message" id="paymentRedirectMessage">You will be redirected to JazzCash</p>
+<button id="paymentStartBtn" class="payment-start-btn jazzcash-btn">
+<span class="btn-icon" id="btnIcon">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path
+d="M12 2L13.09 8.26L20 9L14.55 13.47L16.18 20L12 16.77L7.82 20L9.46 13.47L4 9L10.91 8.26L12 2Z"
+fill="currentColor" />
+</svg>
+</span>
+                    Start JazzCash Payment
+</button>
+                {% else %}
+<p class="payment-error-message" id="paymentErrorMessage">Invalid Payment Method</p>
+                {% endif %}
+</div>
+<!-- Loading Indicator -->
+<div id="paymentLoader" class="payment-loader-container">
+<div class="payment-loader-spinner" id="paymentLoaderSpinner"></div>
+<p class="payment-loader-text" id="paymentLoaderText">Processing your payment...</p>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}
 <!-- JS for Future API Call -->
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const paymentStartBtn = document.getElementById('paymentStartBtn');
-        const paymentLoader = document.getElementById('paymentLoader');
-
-        if (paymentStartBtn) {
-            paymentStartBtn.addEventListener('click', function () {
-                // Show loading state
-                paymentLoader.style.display = 'flex';
-                paymentStartBtn.disabled = true;
-
-                // Simulate API call with timeout
-                setTimeout(() => {
-                    window.location.href = "{% url 'payment_success' %}";
+document.addEventListener('DOMContentLoaded', function () {
+const paymentStartBtn = document.getElementById('paymentStartBtn');
+const paymentLoader = document.getElementById('paymentLoader');
+if (paymentStartBtn) {
+paymentStartBtn.addEventListener('click', function () {
+// Show loading state
+paymentLoader.style.display = 'flex';
+paymentStartBtn.disabled = true;
+// Simulate API call with timeout
+setTimeout(() => {
+window.location.href = "{% url 'payment_success' %}";
                 }, 2000);
             });
         }
     });
 </script>
-
-<style>
-    .payment-gateway-container {
-        max-width: 520px;
-        margin: 40px auto;
-        padding: 0 20px;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-
-    .payment-gateway-card {
-        background: white;
-        border-radius: 16px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-        overflow: hidden;
-        border: 1px solid #eaeaea;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .payment-gateway-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
-    }
-
-    .payment-gateway-header {
-        background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-        color: white;
-        padding: 25px 30px;
-        text-align: center;
-        position: relative;
-    }
-
-    .payment-gateway-title {
-        margin: 0;
-        font-size: 24px;
-        font-weight: 600;
-        letter-spacing: 0.5px;
-    }
-
-    .payment-gateway-icon {
-        margin-top: 15px;
-    }
-
-    .payment-method-icon {
-        height: 40px;
-        width: auto;
-        filter: brightness(0) invert(1);
-    }
-
-    .payment-gateway-body {
-        padding: 30px;
-    }
-
-    .payment-gateway-description {
-        text-align: center;
-        color: #555;
-        margin-bottom: 25px;
-        line-height: 1.6;
-        font-size: 16px;
-    }
-
-    .payment-method-name {
-        color: #2575fc;
-    }
-
-    .payment-divider {
-        height: 1px;
-        background: linear-gradient(to right, transparent, #ddd, transparent);
-        margin: 25px 0;
-    }
-
-    .payment-amount-container {
-        text-align: center;
-        margin-bottom: 30px;
-        padding: 20px;
-        background: #f9f9f9;
-        border-radius: 12px;
-        border: 1px solid #f0f0f0;
-    }
-
-    .payment-amount-label {
-        margin: 0 0 8px 0;
-        font-size: 16px;
-        color: #666;
-    }
-
-    .payment-amount-value {
-        margin: 0;
-        font-size: 32px;
-        font-weight: 700;
-        color: #2c3e50;
-    }
-
-    .payment-action-container {
-        text-align: center;
-        margin-top: 20px;
-    }
-
-    .payment-redirect-message {
-        margin-bottom: 20px;
-        color: #666;
-        font-size: 15px;
-    }
-
-    .payment-start-btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        padding: 14px 28px;
-        border: none;
-        border-radius: 10px;
-        font-size: 16px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        width: 100%;
-        max-width: 280px;
-    }
-
-    .easypaisa-btn {
-        background: linear-gradient(to right, #2196F3, #1976D2);
-        color: white;
-    }
-
-    .jazzcash-btn {
-        background: linear-gradient(to right, #E91E63, #C2185B);
-        color: white;
-    }
-
-    .payment-start-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-    }
-
-    .payment-start-btn:active {
-        transform: translateY(0);
-    }
-
-    .payment-start-btn:disabled {
-        opacity: 0.7;
-        cursor: not-allowed;
-        transform: none;
-    }
-
-    .btn-icon {
-        margin-right: 10px;
-        display: flex;
-        align-items: center;
-    }
-
-    .payment-error-message {
-        color: #e74c3c;
-        font-weight: 600;
-        text-align: center;
-        padding: 15px;
-        background: #ffeaea;
-        border-radius: 8px;
-        border: 1px solid #ffcdd2;
-    }
-
-    .payment-loader-container {
-        display: none;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: 30px 20px;
-        text-align: center;
-    }
-
-    .payment-loader-spinner {
-        width: 50px;
-        height: 50px;
-        border: 5px solid #f3f3f3;
-        border-top: 5px solid #3498db;
-        border-radius: 50%;
-        animation: spin 1s linear infinite;
-        margin-bottom: 20px;
-    }
-
-    .payment-loader-text {
-        color: #666;
-        font-size: 16px;
-        margin: 0;
-    }
-
-    @keyframes spin {
-        0% {
-            transform: rotate(0deg);
-        }
-
-        100% {
-            transform: rotate(360deg);
-        }
-    }
-
-    /* Responsive adjustments */
-    @media (max-width: 576px) {
-        .payment-gateway-container {
-            margin: 20px auto;
-            padding: 0 15px;
-        }
-
-        .payment-gateway-body {
-            padding: 20px;
-        }
-
-        .payment-amount-value {
-            font-size: 28px;
-        }
-
-        .payment-start-btn {
-            padding: 12px 20px;
-            font-size: 15px;
-        }
-    }
-</style>
-{% endblock %}
+</head>
+<body>
+    
+</body>
+</html>

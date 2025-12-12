@@ -173,3 +173,16 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 # MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# EasyPaisa
+# settings.py
+# Replace with your actual ngrok URL (no trailing spaces!)
+EASYPASA_CALLBACK_URL = "https://pseudolateral-genie-unvolubly.ngrok-free.dev/payment/easypaisa/callback/"
+JAZZCASH_RETURN_URL = "https://pseudolateral-genie-unvolubly.ngrok-free.dev/payment/jazzcash/callback/"
+
+# Replace with real merchant credentials
+EASYPASA_STORE_ID = "your_actual_store_id"
+EASYPASA_SECRET_KEY = "your_actual_secret_key"
+JAZZCASH_MERCHANT_ID = "your_actual_merchant_id"
+JAZZCASH_PASSWORD = "your_actual_password"
