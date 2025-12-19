@@ -4,8 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment Failed</title>
-    <link rel="stylesheet" href="{% static 'css/payment.css' %}">
+    <title>Payment Failed - Error Details</title>
     <style>
         * {
             margin: 0;
@@ -13,188 +12,215 @@
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
+        
         body {
-            
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 20px;
         }
-
+        
         .payment-failed-container {
-            max-width: 520px;
             width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
         }
-
+        
         .payment-failed-card {
             background: white;
             border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);
             overflow: hidden;
-            border: 1px solid #eaeaea;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: slideUp 0.5s ease;
         }
-
-        .payment-failed-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-
+        
         .payment-failed-header {
             background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
             color: white;
-            padding: 30px;
+            padding: 40px;
             text-align: center;
             position: relative;
         }
-
+        
         .payment-failed-icon {
-            font-size: 60px;
-            margin-bottom: 15px;
-            display: block;
+            font-size: 80px;
+            margin-bottom: 20px;
+            animation: bounce 1s ease infinite alternate;
         }
-
+        
+        @keyframes bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-10px); }
+        }
+        
         .payment-failed-title {
-            font-size: 28px;
+            font-size: 36px;
+            margin-bottom: 15px;
             font-weight: 700;
-            margin-bottom: 10px;
-            letter-spacing: 0.5px;
         }
-
+        
         .payment-failed-message {
-            font-size: 16px;
+            font-size: 18px;
             opacity: 0.9;
-            line-height: 1.5;
+            margin-bottom: 25px;
+            line-height: 1.6;
         }
-
-        .payment-failed-body {
-            padding: 30px;
-        }
-
-        .payment-failed-suggestions {
-            background: #fff9f9;
-            border: 1px solid #ffebee;
+        
+        .error-details {
+            background: rgba(255, 255, 255, 0.15);
             border-radius: 12px;
             padding: 20px;
-            margin-bottom: 30px;
+            margin-top: 20px;
+            text-align: left;
+            backdrop-filter: blur(10px);
         }
-
-        .payment-failed-suggestions-title {
-            font-size: 18px;
-            font-weight: 600;
-            color: #d32f2f;
-            margin-bottom: 15px;
+        
+        .error-row {
             display: flex;
-            align-items: center;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
-
-        .payment-failed-suggestions-title:before {
-            content: "💡";
-            margin-right: 8px;
-            font-size: 20px;
+        
+        .error-label {
+            font-weight: 600;
+            width: 150px;
+            color: rgba(255, 255, 255, 0.9);
         }
-
+        
+        .error-value {
+            flex: 1;
+            font-family: 'Courier New', monospace;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 8px 12px;
+            border-radius: 6px;
+            word-break: break-all;
+        }
+        
+        .payment-failed-body {
+            padding: 40px;
+        }
+        
+        .payment-failed-suggestions {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border-left: 5px solid #ff6b6b;
+        }
+        
+        .payment-failed-suggestions-title {
+            color: #2c3e50;
+            font-size: 22px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
         .payment-failed-suggestions-list {
-            list-style-type: none;
+            list-style: none;
+            padding-left: 0;
         }
-
+        
         .payment-failed-suggestions-item {
-            padding: 8px 0;
-            padding-left: 25px;
+            padding: 10px 0;
+            padding-left: 30px;
             position: relative;
-            color: #555;
+            color: #34495e;
             line-height: 1.5;
         }
-
+        
         .payment-failed-suggestions-item:before {
             content: "•";
-            color: #f44336;
-            font-weight: bold;
+            color: #ff6b6b;
+            font-size: 24px;
             position: absolute;
-            left: 10px;
+            left: 0;
+            top: 5px;
         }
-
+        
         .payment-failed-actions {
             display: flex;
-            gap: 15px;
-            justify-content: center;
+            gap: 20px;
             flex-wrap: wrap;
+            justify-content: center;
         }
-
+        
         .payment-failed-btn {
-            display: inline-flex;
+            padding: 18px 35px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            display: flex;
             align-items: center;
             justify-content: center;
-            padding: 14px 28px;
-            border: none;
-            border-radius: 10px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
+            gap: 12px;
             transition: all 0.3s ease;
-            text-decoration: none;
-            min-width: 160px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            min-width: 200px;
+            border: none;
+            cursor: pointer;
         }
-
+        
         .payment-failed-btn-primary {
-            background: linear-gradient(to right, #2196F3, #1976D2);
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
             color: white;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
         }
-
+        
         .payment-failed-btn-primary:hover {
-            background: linear-gradient(to right, #1976D2, #1565C0);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(33, 150, 243, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(52, 152, 219, 0.4);
         }
-
+        
         .payment-failed-btn-secondary {
-            background: #f5f5f5;
-            color: #555;
-            border: 1px solid #ddd;
+            background: #ecf0f1;
+            color: #2c3e50;
+            border: 2px solid #bdc3c7;
         }
-
+        
         .payment-failed-btn-secondary:hover {
-            background: #e0e0e0;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+            background: #d5dbdb;
+            transform: translateY(-3px);
         }
-
-        .payment-failed-btn:active {
-            transform: translateY(0);
-        }
-
+        
         .payment-failed-btn-icon {
-            margin-right: 8px;
-            font-size: 18px;
+            font-size: 20px;
         }
-
-        /* Animation for the error icon */
-        @keyframes shake {
-            0%, 100% {transform: translateX(0);}
-            10%, 30%, 50%, 70%, 90% {transform: translateX(-5px);}
-            20%, 40%, 60%, 80% {transform: translateX(5px);}
+        
+        .debug-info {
+            margin-top: 30px;
+            padding: 15px;
+            background: #f1f8ff;
+            border-radius: 10px;
+            font-size: 12px;
+            color: #666;
+            border: 1px dashed #3498db;
         }
-
-        .payment-failed-icon {
-            animation: shake 0.8s ease-in-out;
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 576px) {
+        
+        @media (max-width: 768px) {
             .payment-failed-header {
-                padding: 25px 20px;
+                padding: 30px 20px;
             }
             
             .payment-failed-body {
-                padding: 25px 20px;
+                padding: 30px 20px;
             }
             
             .payment-failed-title {
-                font-size: 24px;
+                font-size: 28px;
             }
             
             .payment-failed-actions {
@@ -204,48 +230,131 @@
             .payment-failed-btn {
                 width: 100%;
             }
+            
+            .error-row {
+                flex-direction: column;
+            }
+            
+            .error-label {
+                width: 100%;
+                margin-bottom: 5px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="payment-failed-container" id="paymentFailedContainer">
-        <div class="payment-failed-card" id="paymentFailedCard">
-            <div class="payment-failed-header" id="paymentFailedHeader">
-                <div class="payment-failed-icon" id="paymentFailedIcon">⚠️</div>
-                <h1 class="payment-failed-title" id="paymentFailedTitle">Payment Failed</h1>
-                <p class="payment-failed-message" id="paymentFailedMessage">
-                    Kuch galat hua hai — payment process complete nahi ho saka.
+    <div class="payment-failed-container">
+        <div class="payment-failed-card">
+            <div class="payment-failed-header">
+                <div class="payment-failed-icon">⚠️</div>
+                <h1 class="payment-failed-title">Payment Failed</h1>
+                
+                <p class="payment-failed-message">
+                    {% if reason == 'empty_cart' %}
+                        🛒 Your shopping cart is empty or there's an issue with your order processing.
+                    {% elif reason == 'gateway_timeout' %}
+                        ⏱️ Payment gateway (EasyPaisa/JazzCash) is not responding. Please try again.
+                    {% elif reason == 'network_error' %}
+                        📶 Network connection issue. Please check your internet connection.
+                    {% elif reason == 'gateway_exception' %}
+                        🔧 Technical error occurred at payment gateway. Our team has been notified.
+                    {% elif reason == 'no_redirect_url' %}
+                        🔗 Could not get redirect URL from payment gateway.
+                    {% elif reason == 'easypaisa_failed' %}
+                        💳 EasyPaisa payment failed. Please check your account balance.
+                    {% elif reason == 'jazzcash_failed' %}
+                        💳 JazzCash payment failed. Please verify your transaction.
+                    {% elif reason == 'callback_error' %}
+                        🔄 Payment callback failed. Please contact support.
+                    {% elif reason == 'order_not_found' %}
+                        📋 Order not found. Please create a new order.
+                    {% elif reason == 'invalid_method' %}
+                        ❌ Invalid payment method selected.
+                    {% elif reason == 'invalid_gateway' %}
+                        🚫 Selected payment gateway is not available.
+                    {% elif reason == 'gateway_error' %}
+                        ⚠️ Payment gateway returned an error.
+                    {% else %}
+                        ❌ Transaction could not be completed. Please check the details below.
+                    {% endif %}
                 </p>
+                
+                <!-- Error Details Section -->
+                <div class="error-details">
+                    <div class="error-row">
+                        <div class="error-label">Error Type:</div>
+                        <div class="error-value">{{ reason|default:"Unknown"|upper }}</div>
+                    </div>
+                    
+                    {% if error_code %}
+                    <div class="error-row">
+                        <div class="error-label">Error Code:</div>
+                        <div class="error-value">{{ error_code }}</div>
+                    </div>
+                    {% endif %}
+                    
+                    {% if error_message %}
+                    <div class="error-row">
+                        <div class="error-label">Message:</div>
+                        <div class="error-value">{{ error_message }}</div>
+                    </div>
+                    {% endif %}
+                    
+                    {% if transaction_id %}
+                    <div class="error-row">
+                        <div class="error-label">Transaction ID:</div>
+                        <div class="error-value">{{ transaction_id }}</div>
+                    </div>
+                    {% endif %}
+                </div>
             </div>
             
-            <div class="payment-failed-body" id="paymentFailedBody">
-                <div class="payment-failed-suggestions" id="paymentFailedSuggestions">
-                    <h3 class="payment-failed-suggestions-title" id="paymentFailedSuggestionsTitle">
-                        Possible Solutions
-                    </h3>
-                    <ul class="payment-failed-suggestions-list" id="paymentFailedSuggestionsList">
-                        <li class="payment-failed-suggestions-item" id="paymentFailedSuggestionsItem1">
-                            Check karo ke internet stable tha.
-                        </li>
-                        <li class="payment-failed-suggestions-item" id="paymentFailedSuggestionsItem2">
-                            Payment gateway service temporarily down ho sakti hai.
-                        </li>
-                        <li class="payment-failed-suggestions-item" id="paymentFailedSuggestionsItem3">
-                            Phir se try karne ke liye "Retry Payment" dabao.
-                        </li>
+            <div class="payment-failed-body">
+                <div class="payment-failed-suggestions">
+                    <h3 class="payment-failed-suggestions-title">Recommended Actions</h3>
+                    <ul class="payment-failed-suggestions-list">
+                        {% if reason == 'gateway_timeout' or reason == 'network_error' %}
+                            <li class="payment-failed-suggestions-item">Check your internet connection stability</li>
+                            <li class="payment-failed-suggestions-item">Try again after a few minutes</li>
+                            <li class="payment-failed-suggestions-item">Switch between Wi-Fi and mobile data</li>
+                        {% elif reason == 'empty_cart' %}
+                            <li class="payment-failed-suggestions-item">Add products to your cart first</li>
+                            <li class="payment-failed-suggestions-item">Refresh the cart page to see updated items</li>
+                        {% elif reason == 'easypaisa_failed' or reason == 'jazzcash_failed' or reason == 'gateway_error' %}
+                            <li class="payment-failed-suggestions-item">Check your account balance and daily transaction limit</li>
+                            <li class="payment-failed-suggestions-item">Ensure your mobile wallet is active and verified</li>
+                            <li class="payment-failed-suggestions-item">Verify your payment details are correct</li>
+                            <li class="payment-failed-suggestions-item">Try using a different payment method</li>
+                        {% elif reason == 'order_not_found' %}
+                            <li class="payment-failed-suggestions-item">Go back to shopping and create a new order</li>
+                            <li class="payment-failed-suggestions-item">Check your order history in your account</li>
+                        {% else %}
+                            <li class="payment-failed-suggestions-item">Verify your payment details are correct</li>
+                            <li class="payment-failed-suggestions-item">Check your account balance</li>
+                            <li class="payment-failed-suggestions-item">Try using a different payment method</li>
+                            <li class="payment-failed-suggestions-item">Contact customer support if issue persists</li>
+                        {% endif %}
                     </ul>
                 </div>
 
-                <div class="payment-failed-actions" id="paymentFailedActions">
-                    <a href="{% url 'payment_method' %}" class="payment-failed-btn payment-failed-btn-primary" id="paymentFailedRetryBtn">
-                        <span class="payment-failed-btn-icon" id="paymentFailedRetryIcon">🔄</span>
-                        Retry Payment
+                <div class="payment-failed-actions">
+                    <a href="{% url 'payment_method' %}" class="payment-failed-btn payment-failed-btn-primary">
+                        <span class="payment-failed-btn-icon">🔄</span> Retry Payment
                     </a>
-                    <a href="{% url 'products' %}" class="payment-failed-btn payment-failed-btn-secondary" id="paymentFailedCancelBtn">
-                        <span class="payment-failed-btn-icon" id="paymentFailedCancelIcon">✖️</span>
-                        Cancel
+                    <a href="{% url 'products' %}" class="payment-failed-btn payment-failed-btn-secondary">
+                        <span class="payment-failed-btn-icon">←</span> Continue Shopping
                     </a>
                 </div>
+                
+                <!-- Debug Information (hidden by default, can be shown with ?debug=true) -->
+                {% if request.GET.debug %}
+                <div class="debug-info">
+                    <strong>Debug Info:</strong><br>
+                    All Parameters: {{ all_params }}<br>
+                    User: {{ request.user.username }}<br>
+                    Time: {% now "Y-m-d H:i:s" %}
+                </div>
+                {% endif %}
             </div>
         </div>
     </div>
